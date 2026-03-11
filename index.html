@@ -5,149 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terraforge — Alchemy Craft Game</title>
     <meta name="description" content="Start with Fire, Water, Air, and Earth. Combine elements to create Dragons, Galaxies, and the Universe. 208 elements, 266 recipes. Free for iOS.">
+    <meta property="og:title" content="Terraforge — Alchemy Craft Game">
+    <meta property="og:description" content="Start with four elements. End with the Universe.">
+    <meta property="og:image" content="images/app-icon.png">
+    <link rel="icon" href="images/app-icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0E0C17;
-            --bg-card: rgba(18, 15, 30, 0.85);
-            --bg-card-hover: #1c1c1f;
-            --text-primary: #ffffff;
-            --text-secondary: #9ca3af;
-            --accent: #D4A03C;
-            --accent-secondary: #8B5CF6;
-            --accent-light: #F5D77A;
-            --accent-glow: rgba(212, 160, 60, 0.4);
-            --green: #10b981;
-            --gradient-1: linear-gradient(135deg, #D4A03C 0%, #8B5CF6 100%);
-            --gradient-2: linear-gradient(135deg, #F59E0B 0%, #D4A03C 100%);
+            --bg-deep: #0A0814;
+            --bg-card: rgba(16, 13, 28, 0.7);
+            --bg-card-solid: #100D1C;
+            --text-primary: #f0eff4;
+            --text-secondary: #8a8899;
+            --gold: #D4A03C;
+            --gold-light: #F5D77A;
+            --gold-glow: rgba(212, 160, 60, 0.35);
+            --purple: #8B5CF6;
+            --purple-glow: rgba(139, 92, 246, 0.25);
+            --green: #34d399;
+            --border: rgba(255, 255, 255, 0.06);
+            --glass: rgba(255, 255, 255, 0.03);
+            --gradient-gold-purple: linear-gradient(135deg, #D4A03C 0%, #8B5CF6 100%);
+            --gradient-gold: linear-gradient(135deg, #F5D77A 0%, #D4A03C 100%);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-dark);
+            background: var(--bg-deep);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Starfield background */
-        .starfield {
+        /* ── Canvas Starfield ── */
+        #starfield {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: 0;
             pointer-events: none;
         }
 
-        .stars-small, .stars-medium, .stars-large {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 200%;
-            background: transparent;
-        }
-
-        .stars-small {
-            background-image:
-                radial-gradient(1px 1px at 50px 80px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 180px 150px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 320px 40px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 470px 200px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 600px 90px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 750px 260px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 100px 340px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 250px 420px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 400px 310px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 550px 480px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 700px 370px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 850px 150px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 920px 420px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 1050px 70px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 1150px 300px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 130px 560px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 350px 600px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 520px 550px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 680px 620px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 830px 580px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 980px 540px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 1100px 610px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 200px 700px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 450px 740px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 650px 710px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(1px 1px at 900px 760px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 1000px 680px, rgba(255,255,255,0.5), transparent);
-            animation: drift 120s linear infinite;
-        }
-
-        .stars-medium {
-            background-image:
-                radial-gradient(1.5px 1.5px at 120px 180px, rgba(255,255,255,0.7), transparent),
-                radial-gradient(1.5px 1.5px at 380px 90px, rgba(220,210,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 580px 320px, rgba(255,255,255,0.7), transparent),
-                radial-gradient(1.5px 1.5px at 820px 210px, rgba(255,240,210,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 200px 480px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 500px 540px, rgba(220,210,255,0.7), transparent),
-                radial-gradient(1.5px 1.5px at 720px 460px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 950px 380px, rgba(255,240,210,0.7), transparent),
-                radial-gradient(1.5px 1.5px at 1080px 500px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 300px 650px, rgba(220,210,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 600px 700px, rgba(255,255,255,0.7), transparent),
-                radial-gradient(1.5px 1.5px at 850px 630px, rgba(255,240,210,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 1100px 720px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 70px 750px, rgba(220,210,255,0.7), transparent);
-            animation: drift 90s linear infinite;
-        }
-
-        .stars-large {
-            background-image:
-                radial-gradient(2px 2px at 250px 120px, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 650px 280px, rgba(212,160,60,0.5), transparent),
-                radial-gradient(2px 2px at 1000px 160px, rgba(255,255,255,0.7), transparent),
-                radial-gradient(2.5px 2.5px at 400px 450px, rgba(139,92,246,0.4), transparent),
-                radial-gradient(2px 2px at 800px 520px, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 150px 600px, rgba(212,160,60,0.4), transparent),
-                radial-gradient(2.5px 2.5px at 550px 680px, rgba(255,255,255,0.7), transparent),
-                radial-gradient(2px 2px at 950px 650px, rgba(139,92,246,0.4), transparent);
-            animation: drift 60s linear infinite;
-        }
-
-        @keyframes drift {
-            from { transform: translateY(0); }
-            to { transform: translateY(-50%); }
-        }
-
-        /* Nebula glow */
+        /* ── Nebula Overlays ── */
         .nebula {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: 0;
             pointer-events: none;
             background:
-                radial-gradient(ellipse 600px 400px at 15% 20%, rgba(139, 92, 246, 0.07) 0%, transparent 70%),
-                radial-gradient(ellipse 500px 350px at 80% 55%, rgba(59, 80, 180, 0.06) 0%, transparent 70%),
-                radial-gradient(ellipse 450px 350px at 50% 85%, rgba(100, 60, 200, 0.05) 0%, transparent 70%);
+                radial-gradient(ellipse 700px 500px at 12% 15%, rgba(139, 92, 246, 0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 400px at 85% 50%, rgba(45, 60, 160, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 400px at 40% 90%, rgba(100, 50, 200, 0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 300px at 70% 10%, rgba(212, 160, 60, 0.04) 0%, transparent 70%);
         }
 
-        /* All content above starfield */
-        nav, main, section, footer, .elements-preview {
+        /* ── Shooting Stars ── */
+        .shooting-star {
+            position: fixed;
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transform: rotate(-35deg);
+        }
+        .shooting-star:nth-child(1) {
+            top: 15%; left: 70%;
+            animation: shoot 8s 2s infinite;
+        }
+        .shooting-star:nth-child(2) {
+            top: 35%; left: 40%;
+            animation: shoot 11s 6s infinite;
+        }
+        .shooting-star:nth-child(3) {
+            top: 55%; left: 85%;
+            animation: shoot 14s 10s infinite;
+        }
+        @keyframes shoot {
+            0% { opacity: 0; transform: rotate(-35deg) translateX(0); }
+            2% { opacity: 1; }
+            6% { opacity: 0; transform: rotate(-35deg) translateX(-300px); }
+            100% { opacity: 0; }
+        }
+
+        /* ── Z-Layering ── */
+        nav, main, section, footer, .hero, .formula-showcase {
             position: relative;
             z-index: 1;
         }
@@ -158,17 +105,32 @@
             padding: 0 24px;
         }
 
-        /* Navigation */
+        /* ── Scroll Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Navigation ── */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 20px 0;
-            background: rgba(14, 12, 23, 0.7);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 16px 0;
+            background: rgba(10, 8, 20, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+        nav.scrolled {
+            background: rgba(10, 8, 20, 0.9);
         }
 
         nav .container {
@@ -181,19 +143,17 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 800;
             text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 800;
         }
-
         .logo img {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 8px;
         }
-
         .logo span {
-            background: var(--gradient-1);
+            background: var(--gradient-gold-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -204,60 +164,39 @@
             gap: 32px;
             list-style: none;
         }
-
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.2s;
         }
+        .nav-links a:hover { color: var(--text-primary); }
 
-        .nav-links a:hover {
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+        }
+        .nav-cta img { height: 40px; width: auto; }
+
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
             color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
         }
+        .mobile-toggle svg { width: 24px; height: 24px; }
 
-        .download-btn {
-            background: var(--accent);
-            color: #0a0a0b;
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px var(--accent-glow);
-        }
-
-        /* Hero Section */
+        /* ── Hero ── */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 0 80px;
-            position: relative;
+            padding: 140px 0 60px;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 70% 80%, rgba(59, 80, 180, 0.12) 0%, transparent 40%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-20px, 20px) rotate(5deg); }
         }
 
         .hero .container {
@@ -265,40 +204,36 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 600px;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.05;
             margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
-
-        .hero-content h1 span {
-            background: var(--gradient-1);
+        .hero-content h1 .gradient {
+            background: var(--gradient-gold-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-content p {
-            font-size: 1.25rem;
+        .hero-content .subtitle {
+            font-size: 1.2rem;
             color: var(--text-secondary);
-            margin-bottom: 16px;
-            max-width: 560px;
+            margin-bottom: 12px;
+            max-width: 520px;
+            line-height: 1.7;
         }
 
         .hero-tagline {
-            font-size: 1rem !important;
-            color: var(--accent) !important;
+            font-size: 0.95rem;
+            color: var(--gold);
             font-weight: 500;
-            margin-bottom: 32px !important;
+            margin-bottom: 36px;
+            opacity: 0.9;
         }
 
         .hero-buttons {
@@ -308,349 +243,359 @@
             align-items: center;
         }
 
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .hero-visual img {
-            max-width: 420px;
-            width: 100%;
-            filter: drop-shadow(0 30px 60px rgba(212, 160, 60, 0.3));
-            animation: heroFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes heroFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--text-primary);
-            color: var(--bg-dark);
-            padding: 16px 28px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-primary svg {
-            width: 24px;
-            height: 24px;
-        }
-
         .app-store-badge {
             display: inline-flex;
             align-items: center;
-            transition: transform 0.2s, opacity 0.2s;
+            transition: transform 0.3s, opacity 0.2s;
         }
-
         .app-store-badge:hover {
             transform: translateY(-3px);
             opacity: 0.9;
         }
+        .app-store-badge img { height: 52px; width: auto; }
+        .app-store-badge.small img { height: 40px; }
 
-        .app-store-badge img {
-            height: 52px;
-            width: auto;
-        }
-
-        .app-store-badge.small img {
-            height: 44px;
-        }
-
-        .btn-secondary {
+        .btn-ghost {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: transparent;
+            gap: 8px;
             color: var(--text-primary);
-            padding: 14px 28px;
+            padding: 14px 24px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: border-color 0.2s, background 0.2s;
+            font-size: 0.95rem;
+            border: 1.5px solid rgba(255,255,255,0.15);
+            transition: all 0.3s;
             height: 52px;
-            box-sizing: border-box;
+        }
+        .btn-ghost:hover {
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.04);
         }
 
-        .btn-secondary:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Elements Preview */
-        .elements-preview {
-            margin-top: 60px;
+        .hero-visual {
             display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-visual img {
+            max-width: 400px;
+            width: 100%;
+            filter: drop-shadow(0 20px 60px rgba(212, 160, 60, 0.25))
+                    drop-shadow(0 0 120px rgba(139, 92, 246, 0.1));
+            animation: heroFloat 7s ease-in-out infinite;
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        /* ── Formula Showcase ── */
+        .formula-showcase {
+            padding: 0 0 60px;
+            display: flex;
             justify-content: center;
         }
-
-        .element-pill {
+        .formula {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .formula-pill {
             display: flex;
             align-items: center;
             gap: 8px;
             background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 18px;
+            border: 1px solid var(--border);
+            padding: 10px 20px;
             border-radius: 50px;
             font-size: 0.9rem;
             color: var(--text-secondary);
-            transition: border-color 0.3s, transform 0.3s;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s;
         }
-
-        .element-pill:hover {
-            border-color: rgba(212, 160, 60, 0.3);
+        .formula-pill:hover {
+            border-color: rgba(212,160,60,0.25);
             transform: translateY(-2px);
         }
-
-        .element-pill .emoji {
-            font-size: 1.2rem;
-        }
-
-        .element-plus {
-            color: var(--accent);
+        .formula-pill .emoji { font-size: 1.2rem; }
+        .formula-op {
+            color: var(--gold);
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+        }
+        .formula-pill.result {
+            border-color: rgba(212,160,60,0.25);
+            background: rgba(212,160,60,0.06);
+            color: var(--gold-light);
         }
 
-        .element-equals {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .element-pill.result {
-            border-color: rgba(212, 160, 60, 0.3);
-            background: rgba(212, 160, 60, 0.08);
-            color: var(--accent-light);
-        }
-
-        /* Stats */
+        /* ── Stats ── */
         .stats {
-            padding: 80px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 72px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
-
         .stats .container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
+            gap: 32px;
             text-align: center;
         }
-
-        .stat-item .number {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-1);
+        .stat-number {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            background: var(--gradient-gold-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
         }
-
-        .stat-item .label {
+        .stat-label {
             color: var(--text-secondary);
-            font-size: 1rem;
-            margin-top: 8px;
+            font-size: 0.95rem;
+            margin-top: 6px;
+            font-weight: 500;
         }
 
-        /* Features */
-        .features {
-            padding: 120px 0;
-        }
-
+        /* ── Section Headers ── */
         .section-header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 72px;
         }
-
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
             font-weight: 800;
             margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
-
         .section-header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 560px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
+        /* ── How It Works ── */
+        .how-it-works {
+            padding: 120px 0;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .step-card {
+            text-align: center;
+            padding: 40px 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .step-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212,160,60,0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-gold-purple);
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0A0814;
+            margin-bottom: 20px;
+        }
+        .step-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .step-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .step-icon {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* ── Features ── */
+        .features {
+            padding: 120px 0;
+        }
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
-
         .feature-card {
             background: var(--bg-card);
             border-radius: 20px;
             padding: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-
         .feature-icon {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
         }
-
-        .feature-icon.gold { background: rgba(212, 160, 60, 0.15); }
-        .feature-icon.purple { background: rgba(139, 92, 246, 0.15); }
-        .feature-icon.green { background: rgba(16, 185, 129, 0.15); }
-        .feature-icon.orange { background: rgba(245, 158, 11, 0.15); }
-        .feature-icon.cyan { background: rgba(6, 182, 212, 0.15); }
-        .feature-icon.pink { background: rgba(236, 72, 153, 0.15); }
+        .feature-icon.gold { background: rgba(212,160,60,0.12); }
+        .feature-icon.purple { background: rgba(139,92,246,0.12); }
+        .feature-icon.green { background: rgba(52,211,153,0.12); }
+        .feature-icon.orange { background: rgba(245,158,11,0.12); }
+        .feature-icon.cyan { background: rgba(6,182,212,0.12); }
+        .feature-icon.pink { background: rgba(236,72,153,0.12); }
 
         .feature-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            line-height: 1.65;
         }
 
-        /* Screenshots */
+        /* ── Screenshots ── */
         .screenshots {
             padding: 120px 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
         }
-
         .screenshots-scroll {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 28px;
             overflow-x: auto;
             padding: 20px 24px;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
-
-        .screenshots-scroll::-webkit-scrollbar {
-            display: none;
-        }
+        .screenshots-scroll::-webkit-scrollbar { display: none; }
 
         .screenshot-item {
             flex-shrink: 0;
             width: 240px;
         }
-
-        .screenshot-item img {
+        .screenshot-frame {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .screenshot-frame:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,160,60,0.15);
+        }
+        .screenshot-frame img {
             width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s;
+            display: block;
         }
-
-        .screenshot-item img:hover {
-            transform: translateY(-8px);
-        }
-
         .screenshot-item p {
             text-align: center;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.02em;
+            margin-top: 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.01em;
         }
 
-        /* Rarity Section */
+        /* ── Rarity ── */
         .rarity {
             padding: 120px 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
         }
-
         .rarity-tiers {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 60px;
         }
-
         .rarity-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            padding: 24px 32px;
+            gap: 14px;
+            padding: 28px 32px;
             background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s;
             min-width: 140px;
         }
-
         .rarity-item:hover {
             transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.1);
         }
-
-        .rarity-dot {
-            width: 16px;
-            height: 16px;
+        .rarity-orb {
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            box-shadow: 0 0 20px currentColor;
+            position: relative;
         }
-
-        .rarity-dot.common { background: #9ca3af; color: #9ca3af; }
-        .rarity-dot.uncommon { background: #22c55e; color: #22c55e; }
-        .rarity-dot.rare { background: #3b82f6; color: #3b82f6; }
-        .rarity-dot.epic { background: #a855f7; color: #a855f7; }
-        .rarity-dot.legendary { background: #D4A03C; color: #D4A03C; box-shadow: 0 0 30px #D4A03C; }
-
+        .rarity-orb::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: inherit;
+            opacity: 0.3;
+            filter: blur(6px);
+        }
+        .rarity-orb.common { background: #9ca3af; }
+        .rarity-orb.uncommon { background: #22c55e; }
+        .rarity-orb.rare { background: #3b82f6; }
+        .rarity-orb.epic { background: #a855f7; }
+        .rarity-orb.legendary {
+            background: linear-gradient(135deg, #F5D77A, #D4A03C);
+        }
+        .rarity-orb.legendary::after {
+            opacity: 0.5;
+            filter: blur(10px);
+            animation: legendaryPulse 2s ease-in-out infinite;
+        }
+        @keyframes legendaryPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+        }
         .rarity-name {
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
-
         .rarity-desc {
             color: var(--text-secondary);
             font-size: 0.8rem;
-            text-align: center;
         }
 
-        /* Pricing */
+        /* ── Pricing ── */
         .pricing {
             padding: 120px 0;
         }
-
         .pricing-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -658,290 +603,238 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
         .pricing-card {
             background: var(--bg-card);
             border-radius: 24px;
             padding: 40px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s;
         }
-
+        .pricing-card:hover {
+            border-color: rgba(255,255,255,0.1);
+        }
         .pricing-card.featured {
-            border-color: rgba(212, 160, 60, 0.3);
+            border-color: rgba(212,160,60,0.2);
         }
-
         .pricing-card.featured::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-1);
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-gold-purple);
         }
 
         .pricing-badge {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 24px;
+            letter-spacing: 0.02em;
         }
-
-        .pricing-badge.free {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--green);
-        }
-
-        .pricing-badge.premium {
-            background: rgba(212, 160, 60, 0.15);
-            color: var(--accent);
-        }
+        .pricing-badge.free { background: rgba(52,211,153,0.12); color: var(--green); }
+        .pricing-badge.premium { background: rgba(212,160,60,0.12); color: var(--gold); }
 
         .pricing-card h3 {
             font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 8px;
         }
-
         .pricing-card .price {
             font-size: 3rem;
-            font-weight: 800;
-            margin: 24px 0;
-            background: var(--gradient-1);
+            font-weight: 900;
+            margin: 20px 0;
+            background: var(--gradient-gold-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .pricing-card .price-note {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-top: -16px;
+            margin-top: -12px;
             margin-bottom: 24px;
         }
-
         .pricing-features {
             list-style: none;
             text-align: left;
             margin: 24px 0;
         }
-
         .pricing-features li {
             padding: 10px 0;
             display: flex;
             align-items: center;
             gap: 12px;
             color: var(--text-secondary);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
         }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
+        .pricing-features li:last-child { border-bottom: none; }
         .pricing-features li svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             color: var(--green);
             flex-shrink: 0;
         }
 
-        .pricing-card .btn-primary {
-            width: 100%;
-            justify-content: center;
-            margin-top: 16px;
-        }
-
-        .pricing-card .btn-secondary {
-            width: 100%;
-            justify-content: center;
-            margin-top: 16px;
-        }
-
-        /* CTA */
+        /* ── CTA ── */
         .cta {
-            padding: 120px 0;
+            padding: 140px 0;
             text-align: center;
             position: relative;
         }
-
         .cta::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, transparent 60%);
-            opacity: 0.5;
+            background: radial-gradient(ellipse 600px 400px at 50% 50%, rgba(139,92,246,0.12) 0%, transparent 70%);
         }
-
-        .cta .container {
-            position: relative;
-            z-index: 1;
-        }
-
+        .cta .container { position: relative; z-index: 1; }
         .cta h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 24px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
-
+        .cta h2 .gradient {
+            background: var(--gradient-gold-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .cta p {
             color: var(--text-secondary);
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             margin-bottom: 40px;
         }
 
-        /* Footer */
+        /* ── Footer ── */
         footer {
-            padding: 60px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
         }
-
         footer .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .footer-links {
             display: flex;
-            gap: 32px;
+            gap: 28px;
             list-style: none;
         }
-
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
-
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
-
+        .footer-links a:hover { color: var(--text-primary); }
         .copyright {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.8rem;
         }
 
-        /* Responsive */
+        /* ── Responsive ── */
         @media (max-width: 1024px) {
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-visual {
-                margin-top: 40px;
-            }
-
-            .hero-visual img {
-                max-width: 320px;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .pricing-cards {
-                grid-template-columns: 1fr;
-                max-width: 450px;
-            }
+            .hero-content .subtitle { margin: 0 auto 12px; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { margin-top: 32px; }
+            .hero-visual img { max-width: 300px; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-cards { grid-template-columns: 1fr; max-width: 420px; }
+            .steps-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-visual img {
-                max-width: 260px;
-            }
-
-            .stats .container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .cta h2 {
-                font-size: 2rem;
-            }
-
-            .elements-preview {
-                gap: 10px;
-            }
-
-            .element-pill {
-                padding: 8px 14px;
-                font-size: 0.8rem;
-            }
-
-            .screenshot-item {
-                width: 200px;
-            }
-
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-visual img { max-width: 240px; }
+            .hero { padding: 120px 0 40px; }
+            .stats .container { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 1.8rem; }
+            .section-header { margin-bottom: 48px; }
+            .formula { gap: 10px; }
+            .formula-pill { padding: 8px 14px; font-size: 0.8rem; }
+            .screenshot-item { width: 190px; }
+            .rarity-tiers { gap: 12px; }
+            .rarity-item { min-width: 120px; padding: 20px 24px; }
             footer .container {
                 flex-direction: column;
-                gap: 24px;
+                gap: 20px;
                 text-align: center;
             }
-
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            .how-it-works, .features, .screenshots, .rarity, .pricing {
+                padding: 80px 0;
             }
+            .cta { padding: 100px 0; }
+
+            /* Mobile menu overlay */
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(10,8,20,0.97);
+                backdrop-filter: blur(20px);
+                z-index: 200;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+            }
+            .nav-links.open a {
+                font-size: 1.5rem;
+                color: var(--text-primary);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 1.9rem; }
+            .formula-showcase { padding: 0 0 40px; }
         }
     </style>
 </head>
 <body>
-    <!-- Starfield Background -->
-    <div class="starfield">
-        <div class="stars-small"></div>
-        <div class="stars-medium"></div>
-        <div class="stars-large"></div>
-    </div>
+    <!-- Starfield Canvas -->
+    <canvas id="starfield"></canvas>
     <div class="nebula"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
 
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="container">
             <a href="index.html" class="logo">
                 <img src="images/app-icon.png" alt="Terraforge">
                 <span>Terraforge</span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#screenshots">Screenshots</a></li>
                 <li><a href="support.html">Support</a></li>
             </ul>
-            <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge small">
+            <a href="https://apps.apple.com/app/id6759879809" class="nav-cta app-store-badge small">
                 <img src="images/app-store-badge.svg" alt="Download on the App Store">
             </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
     </nav>
 
@@ -949,60 +842,87 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Forge <span>Everything</span> from Nothing</h1>
-                <p>Start with Fire, Water, Air, and Earth. Combine elements to create Dragons, Galaxies, and the Universe itself.</p>
+                <h1>Forge <span class="gradient">Everything</span><br>from Nothing</h1>
+                <p class="subtitle">Start with Fire, Water, Air, and Earth. Combine elements to discover Dragons, Galaxies, and the Universe itself.</p>
                 <p class="hero-tagline">Every recipe makes sense. Every discovery feels earned.</p>
                 <div class="hero-buttons">
                     <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge">
                         <img src="images/app-store-badge.svg" alt="Download on the App Store">
                     </a>
-                    <a href="#features" class="btn-secondary">
-                        Learn More
-                    </a>
+                    <a href="#how-it-works" class="btn-ghost">Learn More</a>
                 </div>
             </div>
-
             <div class="hero-visual">
-                <img src="images/forger.png" alt="The Forger - Master of Elements">
+                <img src="images/forger.png" alt="The Forger — Master of Elements">
             </div>
         </div>
     </section>
 
-    <!-- Element Preview -->
-    <div style="display:flex;justify-content:center;padding:0 0 40px;position:relative;z-index:1;">
-        <div class="elements-preview">
-            <div class="element-pill">
+    <!-- Formula Showcase -->
+    <div class="formula-showcase reveal">
+        <div class="formula">
+            <div class="formula-pill">
                 <span class="emoji">🦎</span> Lizard
             </div>
-            <span class="element-plus">+</span>
-            <div class="element-pill">
+            <span class="formula-op">+</span>
+            <div class="formula-pill">
                 <span class="emoji">🔥</span> Fire
             </div>
-            <span class="element-equals">=</span>
-            <div class="element-pill result">
+            <span class="formula-op">=</span>
+            <div class="formula-pill result">
                 <span class="emoji">🐉</span> Dragon
             </div>
         </div>
     </div>
 
     <!-- Stats -->
-    <section class="stats">
+    <section class="stats reveal">
         <div class="container">
             <div class="stat-item">
-                <div class="number">208</div>
-                <div class="label">Elements</div>
+                <div class="stat-number" data-target="208">0</div>
+                <div class="stat-label">Elements</div>
             </div>
             <div class="stat-item">
-                <div class="number">266</div>
-                <div class="label">Recipes</div>
+                <div class="stat-number" data-target="266">0</div>
+                <div class="stat-label">Recipes</div>
             </div>
             <div class="stat-item">
-                <div class="number">31</div>
-                <div class="label">Milestones</div>
+                <div class="stat-number" data-target="31">0</div>
+                <div class="stat-label">Milestones</div>
             </div>
             <div class="stat-item">
-                <div class="number">9</div>
-                <div class="label">Tiers</div>
+                <div class="stat-number" data-target="9">0</div>
+                <div class="stat-label">Tiers</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Simple to start, impossible to stop</h2>
+                <p>Drag, combine, discover. The forge does the rest.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <span class="step-icon">⚗️</span>
+                    <div class="step-number">1</div>
+                    <h3>Combine</h3>
+                    <p>Drag any two elements together on the forge. Water + Earth? That's Mud. Fire + Mud? Brick. Every recipe follows real-world logic.</p>
+                </div>
+                <div class="step-card reveal">
+                    <span class="step-icon">📖</span>
+                    <div class="step-number">2</div>
+                    <h3>Discover</h3>
+                    <p>Each new element unlocks in your personal grimoire. Browse 16 categories — Nature, Mythical, Space, Pop Culture, and more.</p>
+                </div>
+                <div class="step-card reveal">
+                    <span class="step-icon">🏆</span>
+                    <div class="step-number">3</div>
+                    <h3>Master</h3>
+                    <p>Chase 31 milestones from your first Plant to forging the Universe. Climb 9 tiers and compete on the Game Center leaderboard.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1010,40 +930,40 @@
     <!-- Features -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Every combination is a discovery</h2>
                 <p>Drag elements together and watch mud become life, life become civilization, and civilization become legend.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-icon gold">⚗️</div>
-                    <h3>Element Combination</h3>
-                    <p>Drag any two elements together to discover what they create. Combine Water + Earth for Mud, mix Day + Night to unlock Time.</p>
+                    <h3>Intuitive Forging</h3>
+                    <p>Drag any two elements together to discover what they create. Water + Earth = Mud. Day + Night = Time. Every recipe makes sense.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-icon purple">📖</div>
                     <h3>Your Grimoire</h3>
                     <p>Track every discovery in your personal grimoire. Browse 16 categories from Nature and Mythical to Space and Pop Culture.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-icon orange">🏆</div>
                     <h3>31 Milestones</h3>
                     <p>Your journey has chapters. Create your first Plant, discover a Dragon, build an Empire. Each milestone celebrates your progress.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-icon cyan">✨</div>
                     <h3>Discovery Effects</h3>
-                    <p>Common elements sparkle. Rare ones send shockwaves. Legendary discoveries shake the screen and rain gold.</p>
+                    <p>Five rarity tiers with unique effects. Common elements sparkle gently. Legendary ones shake the screen and rain gold.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon green">🧩</div>
-                    <h3>266 Recipes</h3>
-                    <p>From intuitive first steps to legendary breakthroughs. Every combination is a puzzle waiting to be solved.</p>
+                <div class="feature-card reveal">
+                    <div class="feature-icon green">📡</div>
+                    <h3>Works Offline</h3>
+                    <p>100% offline. No internet, no accounts, no ads. Your progress syncs across devices via iCloud when you're back online.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon pink">🔊</div>
-                    <h3>Sound & Rarity</h3>
-                    <p>Five rarity tiers with unique effects. Sound and visuals scale from subtle sparkles to screen-shaking gold rain.</p>
+                <div class="feature-card reveal">
+                    <div class="feature-icon pink">🔒</div>
+                    <h3>Zero Data Collection</h3>
+                    <p>No analytics, no tracking, no third-party SDKs. Your discoveries stay on your device. Privacy by design.</p>
                 </div>
             </div>
         </div>
@@ -1052,61 +972,69 @@
     <!-- Screenshots -->
     <section class="screenshots" id="screenshots">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>See it in action</h2>
                 <p>Combine elements, explore your grimoire, master recipes, and forge your legacy.</p>
             </div>
         </div>
-        <div class="screenshots-scroll">
+        <div class="screenshots-scroll reveal">
             <div class="screenshot-item">
-                <img src="screenshots/01-forge.png" alt="Combine the elements">
-                <p>Combine the Elements</p>
+                <div class="screenshot-frame">
+                    <img src="screenshots/01-forge.png" alt="The Forge — combine elements" loading="lazy">
+                </div>
+                <p>The Forge</p>
             </div>
             <div class="screenshot-item">
-                <img src="screenshots/03-element.png" alt="Master every recipe">
-                <p>Master Every Recipe</p>
+                <div class="screenshot-frame">
+                    <img src="screenshots/02-grimoire.png" alt="Your Grimoire — track discoveries" loading="lazy">
+                </div>
+                <p>Your Grimoire</p>
             </div>
             <div class="screenshot-item">
-                <img src="screenshots/02-grimoire.png" alt="Explore your grimoire">
-                <p>Explore Your Grimoire</p>
+                <div class="screenshot-frame">
+                    <img src="screenshots/03-element.png" alt="Element Detail — discover recipes" loading="lazy">
+                </div>
+                <p>Element Detail</p>
             </div>
             <div class="screenshot-item">
-                <img src="screenshots/04-milestones.png" alt="Forge your legacy">
-                <p>Forge Your Legacy</p>
+                <div class="screenshot-frame">
+                    <img src="screenshots/04-milestones.png" alt="Milestones — forge your legend" loading="lazy">
+                </div>
+                <p>Milestones</p>
             </div>
         </div>
     </section>
 
-    <!-- Rarity Tiers -->
+    <!-- Rarity -->
     <section class="rarity" id="rarity">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Five tiers of discovery</h2>
                 <p>Each rarity rewards your curiosity with increasingly spectacular effects.</p>
             </div>
-            <div class="rarity-tiers">
+            <div class="rarity-tiers reveal">
                 <div class="rarity-item">
-                    <div class="rarity-dot common"></div>
+                    <div class="rarity-orb common"></div>
                     <span class="rarity-name">Common</span>
                     <span class="rarity-desc">Gentle sparkle</span>
                 </div>
                 <div class="rarity-item">
-                    <div class="rarity-dot uncommon"></div>
+                    <div class="rarity-orb uncommon"></div>
                     <span class="rarity-name">Uncommon</span>
                     <span class="rarity-desc">Bright glow</span>
                 </div>
                 <div class="rarity-item">
-                    <div class="rarity-dot rare"></div>
+                    <div class="rarity-orb rare"></div>
                     <span class="rarity-name">Rare</span>
                     <span class="rarity-desc">Shockwave</span>
                 </div>
                 <div class="rarity-item">
-                    <div class="rarity-dot epic"></div>
+                    <div class="rarity-orb epic"></div>
                     <span class="rarity-name">Epic</span>
                     <span class="rarity-desc">Screen shake</span>
                 </div>
                 <div class="rarity-item">
-                    <div class="rarity-dot legendary"></div>
+                    <div class="rarity-orb legendary"></div>
                     <span class="rarity-name">Legendary</span>
                     <span class="rarity-desc">Gold rain</span>
                 </div>
@@ -1117,39 +1045,31 @@
     <!-- Pricing -->
     <section class="pricing" id="pricing">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Start forging for free</h2>
                 <p>The full game is free. Unlock recipe hints when you need a nudge.</p>
             </div>
-            <div class="pricing-cards">
+            <div class="pricing-cards reveal">
                 <div class="pricing-card">
-                    <div class="pricing-badge free">Free</div>
+                    <div class="pricing-badge free">Free Forever</div>
                     <h3>Apprentice</h3>
                     <div class="price">$0</div>
                     <ul class="pricing-features">
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                             All 208 elements
                         </li>
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                             266 recipes to discover
                         </li>
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                             Full grimoire access
                         </li>
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            31 milestones
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            31 milestones & Game Center
                         </li>
                     </ul>
                     <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge small" style="margin-top:16px;">
@@ -1163,28 +1083,20 @@
                     <p class="price-note">Yours forever. No subscriptions.</p>
                     <ul class="pricing-features">
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                             Everything in Free
                         </li>
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Recipe hints for undiscovered elements
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Recipe hints for every element
                         </li>
                         <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Uninterrupted forging
+                        </li>
+                        <li>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                             All future content included
-                        </li>
-                        <li>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Support development
                         </li>
                     </ul>
                     <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge small" style="margin-top:16px;">
@@ -1198,7 +1110,7 @@
     <!-- CTA -->
     <section class="cta" id="download">
         <div class="container">
-            <h2>Create everything from nothing</h2>
+            <h2>Create <span class="gradient">everything</span> from nothing</h2>
             <p>Start with four elements. End with the Universe.</p>
             <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge">
                 <img src="images/app-store-badge.svg" alt="Download on the App Store">
@@ -1221,5 +1133,112 @@
             <p class="copyright">&copy; 2026 Terraforge. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // ── Canvas Starfield ──
+        (function() {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            const STAR_COUNT = 280;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createStars() {
+                stars = [];
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 1.6 + 0.3,
+                        alpha: Math.random() * 0.6 + 0.2,
+                        twinkleSpeed: Math.random() * 0.015 + 0.003,
+                        twinkleOffset: Math.random() * Math.PI * 2,
+                        // Subtle color: mostly white, some warm/cool tints
+                        hue: Math.random() < 0.15 ? (Math.random() < 0.5 ? 40 : 260) : 0,
+                        sat: Math.random() < 0.15 ? 30 : 0
+                    });
+                }
+            }
+
+            let time = 0;
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                time += 0.016;
+                for (const s of stars) {
+                    const twinkle = Math.sin(time * s.twinkleSpeed * 60 + s.twinkleOffset);
+                    const alpha = s.alpha + twinkle * 0.2;
+                    if (s.sat > 0) {
+                        ctx.fillStyle = `hsla(${s.hue}, ${s.sat}%, 85%, ${Math.max(0.05, alpha)})`;
+                    } else {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0.05, alpha)})`;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                requestAnimationFrame(draw);
+            }
+
+            resize();
+            createStars();
+            draw();
+            window.addEventListener('resize', () => { resize(); createStars(); });
+        })();
+
+        // ── Scroll Reveal ──
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // ── Nav scroll effect ──
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ── Animated counters ──
+        const counters = document.querySelectorAll('.stat-number[data-target]');
+        let countersDone = false;
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersDone) {
+                    countersDone = true;
+                    counters.forEach(el => {
+                        const target = parseInt(el.dataset.target);
+                        const duration = 1600;
+                        const start = performance.now();
+                        function update(now) {
+                            const elapsed = now - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const eased = 1 - Math.pow(1 - progress, 3);
+                            el.textContent = Math.round(eased * target);
+                            if (progress < 1) requestAnimationFrame(update);
+                        }
+                        requestAnimationFrame(update);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+        counters.forEach(el => counterObserver.observe(el));
+
+        // ── Mobile menu ──
+        document.getElementById('mobileToggle').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+        document.querySelectorAll('#navLinks a').forEach(a => {
+            a.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+    </script>
 </body>
 </html>

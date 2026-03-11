@@ -3,36 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Terraforge</title>
+    <title>Privacy Policy — Terraforge</title>
+    <meta name="description" content="Terraforge privacy policy. We collect zero personal data.">
+    <link rel="icon" href="images/app-icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #f8f9fa;
-            --bg-card: #ffffff;
-            --text-primary: #1a1a2e;
-            --text-secondary: #6b7280;
-            --accent: #D4A03C;
-            --accent-secondary: #8B5CF6;
-            --accent-light: rgba(212, 160, 60, 0.1);
-            --border: #e5e7eb;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --bg-deep: #0A0814;
+            --bg-card: rgba(16, 13, 28, 0.7);
+            --text-primary: #f0eff4;
+            --text-secondary: #8a8899;
+            --gold: #D4A03C;
+            --gold-light: #F5D77A;
+            --purple: #8B5CF6;
+            --green: #34d399;
+            --border: rgba(255, 255, 255, 0.06);
+            --gradient-gold-purple: linear-gradient(135deg, #D4A03C 0%, #8B5CF6 100%);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-primary);
+            background: var(--bg-deep);
             color: var(--text-primary);
             line-height: 1.7;
+            overflow-x: hidden;
             min-height: 100vh;
         }
+
+        /* ── Canvas Starfield ── */
+        #starfield {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .nebula {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 600px 400px at 15% 20%, rgba(139,92,246,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 350px at 80% 60%, rgba(45,60,160,0.05) 0%, transparent 70%);
+        }
+
+        nav, main, footer { position: relative; z-index: 1; }
 
         .container {
             max-width: 720px;
@@ -40,136 +60,208 @@
             padding: 0 24px;
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            padding: 60px 24px;
-            text-align: center;
-            color: white;
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            background: rgba(10,8,20,0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
         }
-
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+        }
         .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 800;
         }
-
-        header h1 {
-            font-size: 1.5rem;
+        .logo img { width: 34px; height: 34px; border-radius: 8px; }
+        .logo span {
+            background: var(--gradient-gold-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 500;
-            opacity: 0.95;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-cta { display: inline-flex; align-items: center; }
+        .nav-cta img { height: 40px; width: auto; }
+
+        /* ── Scroll Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+                        transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Page Header ── */
+        .page-header {
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .page-header h1 .gradient {
+            background: var(--gradient-gold-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
         }
 
-        /* Main Content */
-        main {
-            padding: 48px 0 80px;
-        }
+        /* ── Main Content ── */
+        main { padding: 0 0 80px; }
 
         .content-card {
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 44px;
+            backdrop-filter: blur(12px);
         }
 
         .last-updated {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             margin-bottom: 32px;
             padding-bottom: 24px;
             border-bottom: 1px solid var(--border);
         }
 
-        h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
-
-        h2:first-of-type {
-            margin-top: 0;
-        }
-
-        p {
-            margin-bottom: 16px;
-            color: var(--text-secondary);
-        }
-
-        ul {
-            margin-bottom: 16px;
-            padding-left: 24px;
-            color: var(--text-secondary);
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
         .highlight-box {
-            background: var(--accent-light);
-            border-radius: 12px;
+            background: rgba(212,160,60,0.06);
+            border: 1px solid rgba(212,160,60,0.12);
+            border-radius: 14px;
             padding: 20px 24px;
             margin: 24px 0;
         }
-
         .highlight-box p {
-            color: var(--accent);
+            color: var(--gold-light);
             font-weight: 500;
             margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+        h2:first-of-type { margin-top: 0; }
+
+        p {
+            margin-bottom: 14px;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        ul {
+            margin-bottom: 14px;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+        li {
+            margin-bottom: 8px;
+            font-size: 0.92rem;
         }
 
         a {
-            color: var(--accent);
+            color: var(--gold);
             text-decoration: none;
         }
+        a:hover { text-decoration: underline; }
 
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
+        /* ── Footer ── */
         footer {
             text-align: center;
             padding: 40px 24px;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
         }
-
-        .footer-links {
-            margin-bottom: 16px;
-        }
-
+        .footer-links { margin-bottom: 16px; }
         .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
             margin: 0 12px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text-primary); }
+        footer > p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            header {
-                padding: 48px 24px;
-            }
-
-            .logo {
-                font-size: 2rem;
-            }
-
-            .content-card {
-                padding: 28px 24px;
-            }
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header { padding: 120px 0 40px; }
+            .content-card { padding: 28px 22px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Terraforge</div>
-        <h1>Privacy Policy</h1>
-    </header>
+    <canvas id="starfield"></canvas>
+    <div class="nebula"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/app-icon.png" alt="Terraforge">
+                <span>Terraforge</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="index.html#features">Features</a></li>
+            </ul>
+            <a href="https://apps.apple.com/app/id6759879809" class="nav-cta">
+                <img src="images/app-store-badge.svg" alt="Download on the App Store">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Privacy <span class="gradient">Policy</span></h1>
+        <p>Zero data collection. By design.</p>
+    </div>
 
     <main>
         <div class="container">
-            <div class="content-card">
+            <div class="content-card reveal">
                 <p class="last-updated">Last updated: March 4, 2026</p>
 
                 <div class="highlight-box">
@@ -180,7 +272,7 @@
                 <p>Terraforge is an element combination game designed with privacy as a core principle. We believe you should be able to enjoy our game without any concerns about your personal information.</p>
 
                 <h2>Data We Don't Collect</h2>
-                <p>To be completely clear, Terraforge does <strong>not</strong> collect:</p>
+                <p>To be completely clear, Terraforge does <strong style="color:var(--text-primary)">not</strong> collect:</p>
                 <ul>
                     <li>Personal identification information (name, email, phone number)</li>
                     <li>Location data</li>
@@ -191,10 +283,16 @@
                 </ul>
 
                 <h2>Local Storage</h2>
-                <p>Your game progress — discovered elements, milestones, and preferences — is stored locally on your device. This data never leaves your device and is not transmitted to any server or third party.</p>
+                <p>Your game progress — discovered elements, milestones, and preferences — is stored locally on your device using the Keychain. This data never leaves your device and is not transmitted to any server or third party.</p>
+
+                <h2>iCloud Sync</h2>
+                <p>If you have iCloud enabled, Terraforge will sync your game progress across your devices using Apple's iCloud Key-Value Storage. This data is managed entirely by Apple and is not accessible to us. You can disable iCloud sync in your device settings.</p>
 
                 <h2>In-App Purchases</h2>
                 <p>Terraforge offers an optional one-time purchase (Master Forger). This transaction is handled entirely by Apple through the App Store. We do not process, store, or have access to any payment information.</p>
+
+                <h2>Game Center</h2>
+                <p>Terraforge supports Game Center for leaderboards. Game Center is managed entirely by Apple. We do not access or store your Game Center profile information.</p>
 
                 <h2>No Account Required</h2>
                 <p>Terraforge does not require you to create an account or sign in. All features are available immediately after download with no registration needed.</p>
@@ -209,10 +307,10 @@
                 <p>Terraforge does not collect personal information from anyone, including children under 13. The game is safe for users of all ages.</p>
 
                 <h2>Changes to This Policy</h2>
-                <p>If we ever change our privacy practices, we will update this policy and the "Last updated" date above. However, given our commitment to not collecting data, we do not anticipate any significant changes.</p>
+                <p>If we ever change our privacy practices, we will update this policy and the "Last updated" date above. Given our commitment to not collecting data, we do not anticipate significant changes.</p>
 
                 <h2>Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy or our practices, please contact us at:</p>
+                <p>If you have any questions about this Privacy Policy, please contact us at:</p>
                 <p><a href="mailto:joamaferapps@gmail.com">joamaferapps@gmail.com</a></p>
 
                 <div class="highlight-box">
@@ -230,5 +328,55 @@
         </div>
         <p>&copy; 2026 Terraforge. All rights reserved.</p>
     </footer>
+
+    <script>
+        // ── Canvas Starfield ──
+        (function() {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            const COUNT = 180;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            function create() {
+                stars = [];
+                for (let i = 0; i < COUNT; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 1.4 + 0.3,
+                        alpha: Math.random() * 0.5 + 0.2,
+                        speed: Math.random() * 0.012 + 0.003,
+                        offset: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+            let t = 0;
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                t += 0.016;
+                for (const s of stars) {
+                    const a = s.alpha + Math.sin(t * s.speed * 60 + s.offset) * 0.18;
+                    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.05, a)})`;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                requestAnimationFrame(draw);
+            }
+            resize(); create(); draw();
+            window.addEventListener('resize', () => { resize(); create(); });
+        })();
+
+        // ── Scroll Reveal ──
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        reveals.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
