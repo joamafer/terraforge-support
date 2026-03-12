@@ -51,47 +51,6 @@
         }
 
         /* ── Nebula Overlays ── */
-        .nebula {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 700px 500px at 12% 15%, rgba(139, 92, 246, 0.08) 0%, transparent 70%),
-                radial-gradient(ellipse 600px 400px at 85% 50%, rgba(45, 60, 160, 0.06) 0%, transparent 70%),
-                radial-gradient(ellipse 500px 400px at 40% 90%, rgba(100, 50, 200, 0.05) 0%, transparent 70%),
-                radial-gradient(ellipse 400px 300px at 70% 10%, rgba(212, 160, 60, 0.04) 0%, transparent 70%);
-        }
-
-        /* ── Shooting Stars ── */
-        .shooting-star {
-            position: fixed;
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0;
-            transform: rotate(-35deg);
-        }
-        .shooting-star:nth-child(1) {
-            top: 15%; left: 70%;
-            animation: shoot 8s 2s infinite;
-        }
-        .shooting-star:nth-child(2) {
-            top: 35%; left: 40%;
-            animation: shoot 11s 6s infinite;
-        }
-        .shooting-star:nth-child(3) {
-            top: 55%; left: 85%;
-            animation: shoot 14s 10s infinite;
-        }
-        @keyframes shoot {
-            0% { opacity: 0; transform: rotate(-35deg) translateX(0); }
-            2% { opacity: 1; }
-            6% { opacity: 0; transform: rotate(-35deg) translateX(-300px); }
-            100% { opacity: 0; }
-        }
 
         /* ── Z-Layering ── */
         nav, main, section, footer, .hero, .formula-showcase {
@@ -179,16 +138,6 @@
         }
         .nav-cta img { height: 40px; width: auto; }
 
-        /* Mobile Menu */
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            cursor: pointer;
-            padding: 8px;
-        }
-        .mobile-toggle svg { width: 24px; height: 24px; }
 
         /* ── Hero ── */
         .hero {
@@ -757,7 +706,6 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .mobile-toggle { display: block; }
             .hero-content h1 { font-size: 2.2rem; }
             .hero-visual img { max-width: 240px; }
             .hero { padding: 120px 0 40px; }
@@ -781,23 +729,6 @@
             }
             .cta { padding: 100px 0; }
 
-            /* Mobile menu overlay */
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(10,8,20,0.97);
-                backdrop-filter: blur(20px);
-                z-index: 200;
-                align-items: center;
-                justify-content: center;
-                gap: 40px;
-            }
-            .nav-links.open a {
-                font-size: 1.5rem;
-                color: var(--text-primary);
-            }
         }
 
         @media (max-width: 480px) {
@@ -809,10 +740,6 @@
 <body>
     <!-- Starfield Canvas -->
     <canvas id="starfield"></canvas>
-    <div class="nebula"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -830,11 +757,6 @@
             <a href="https://apps.apple.com/app/id6759879809" class="nav-cta app-store-badge small">
                 <img src="images/app-store-badge.svg" alt="Download on the App Store">
             </a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
         </div>
     </nav>
 
@@ -891,7 +813,7 @@
                 <div class="stat-label">Milestones</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" data-target="9">0</div>
+                <div class="stat-number" data-target="13">0</div>
                 <div class="stat-label">Tiers</div>
             </div>
         </div>
@@ -921,7 +843,7 @@
                     <span class="step-icon">🏆</span>
                     <div class="step-number">3</div>
                     <h3>Master</h3>
-                    <p>Chase 31 milestones from your first Plant to forging the Universe. Climb 9 tiers and compete on the Game Center leaderboard.</p>
+                    <p>Chase 31 milestones from your first Plant to forging the Universe. Climb 13 tiers and compete on the Game Center leaderboard.</p>
                 </div>
             </div>
         </div>
@@ -953,7 +875,7 @@
                 <div class="feature-card reveal">
                     <div class="feature-icon cyan">✨</div>
                     <h3>Discovery Effects</h3>
-                    <p>Five rarity tiers with unique effects. Common elements sparkle gently. Legendary ones shake the screen and rain gold.</p>
+                    <p>Six rarity tiers with unique effects. Common elements sparkle gently. Legendary ones shake the screen and rain gold.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="feature-icon green">📡</div>
@@ -1009,7 +931,7 @@
     <section class="rarity" id="rarity">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Five tiers of discovery</h2>
+                <h2>Six tiers of discovery</h2>
                 <p>Each rarity rewards your curiosity with increasingly spectacular effects.</p>
             </div>
             <div class="rarity-tiers reveal">
@@ -1135,58 +1057,34 @@
     </footer>
 
     <script>
-        // ── Canvas Starfield ──
+        // ── Static Canvas Starfield ──
         (function() {
             const canvas = document.getElementById('starfield');
             const ctx = canvas.getContext('2d');
-            let stars = [];
             const STAR_COUNT = 280;
 
-            function resize() {
+            function draw() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-            }
-
-            function createStars() {
-                stars = [];
                 for (let i = 0; i < STAR_COUNT; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        r: Math.random() * 1.6 + 0.3,
-                        alpha: Math.random() * 0.6 + 0.2,
-                        twinkleSpeed: Math.random() * 0.015 + 0.003,
-                        twinkleOffset: Math.random() * Math.PI * 2,
-                        // Subtle color: mostly white, some warm/cool tints
-                        hue: Math.random() < 0.15 ? (Math.random() < 0.5 ? 40 : 260) : 0,
-                        sat: Math.random() < 0.15 ? 30 : 0
-                    });
-                }
-            }
-
-            let time = 0;
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                time += 0.016;
-                for (const s of stars) {
-                    const twinkle = Math.sin(time * s.twinkleSpeed * 60 + s.twinkleOffset);
-                    const alpha = s.alpha + twinkle * 0.2;
-                    if (s.sat > 0) {
-                        ctx.fillStyle = `hsla(${s.hue}, ${s.sat}%, 85%, ${Math.max(0.05, alpha)})`;
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const r = Math.random() * 1.6 + 0.3;
+                    const alpha = Math.random() * 0.6 + 0.2;
+                    if (Math.random() < 0.15) {
+                        const hue = Math.random() < 0.5 ? 40 : 260;
+                        ctx.fillStyle = `hsla(${hue}, 30%, 85%, ${alpha})`;
                     } else {
-                        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0.05, alpha)})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
                     }
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
                     ctx.fill();
                 }
-                requestAnimationFrame(draw);
             }
 
-            resize();
-            createStars();
             draw();
-            window.addEventListener('resize', () => { resize(); createStars(); });
+            window.addEventListener('resize', draw);
         })();
 
         // ── Scroll Reveal ──
@@ -1230,15 +1128,6 @@
         }, { threshold: 0.3 });
         counters.forEach(el => counterObserver.observe(el));
 
-        // ── Mobile menu ──
-        document.getElementById('mobileToggle').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('open');
-        });
-        document.querySelectorAll('#navLinks a').forEach(a => {
-            a.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('open');
-            });
-        });
     </script>
 </body>
 </html>

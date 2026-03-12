@@ -42,15 +42,6 @@
             z-index: 0;
             pointer-events: none;
         }
-        .nebula {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 600px 400px at 15% 20%, rgba(139,92,246,0.06) 0%, transparent 70%),
-                radial-gradient(ellipse 500px 350px at 80% 60%, rgba(45,60,160,0.05) 0%, transparent 70%);
-        }
 
         nav, main, footer { position: relative; z-index: 1; }
 
@@ -367,7 +358,6 @@
 </head>
 <body>
     <canvas id="starfield"></canvas>
-    <div class="nebula"></div>
 
     <!-- Navigation -->
     <nav>
@@ -465,7 +455,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Elements span five rarity levels: Common, Uncommon, Rare, Epic, and Legendary. Rarer elements have more spectacular discovery effects — from gentle sparkles for Common to screen-shaking gold rain for Legendary. The rarity reflects how advanced the element is in the discovery tree and spans 9 tiers of complexity.
+                            Elements span six rarity levels: Primordial, Common, Uncommon, Rare, Epic, and Legendary. Rarer elements have more spectacular discovery effects — from gentle sparkles for Common to screen-shaking gold rain for Legendary. The rarity reflects how advanced the element is in the discovery tree and spans 13 tiers of complexity.
                         </div>
                     </div>
                 </div>
@@ -571,7 +561,7 @@
                         </div>
                         <div class="tip-content">
                             <h3>Experiment freely</h3>
-                            <p>There are 266 recipes hidden across 9 tiers. Some of the most surprising discoveries come from unexpected combinations.</p>
+                            <p>There are 266 recipes hidden across 13 tiers. Some of the most surprising discoveries come from unexpected combinations.</p>
                         </div>
                     </div>
                 </div>
@@ -597,7 +587,7 @@
                             <div class="label">Recipes</div>
                         </div>
                         <div class="app-info-item">
-                            <div class="value">9</div>
+                            <div class="value">13</div>
                             <div class="label">Tiers</div>
                         </div>
                         <div class="app-info-item">
@@ -620,45 +610,29 @@
     </footer>
 
     <script>
-        // ── Canvas Starfield ──
+        // ── Static Canvas Starfield ──
         (function() {
             const canvas = document.getElementById('starfield');
             const ctx = canvas.getContext('2d');
-            let stars = [];
             const COUNT = 200;
 
-            function resize() {
+            function draw() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-            }
-            function create() {
-                stars = [];
                 for (let i = 0; i < COUNT; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        r: Math.random() * 1.4 + 0.3,
-                        alpha: Math.random() * 0.5 + 0.2,
-                        speed: Math.random() * 0.012 + 0.003,
-                        offset: Math.random() * Math.PI * 2
-                    });
-                }
-            }
-            let t = 0;
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                t += 0.016;
-                for (const s of stars) {
-                    const a = s.alpha + Math.sin(t * s.speed * 60 + s.offset) * 0.18;
-                    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.05, a)})`;
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const r = Math.random() * 1.4 + 0.3;
+                    const alpha = Math.random() * 0.5 + 0.2;
+                    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
                     ctx.fill();
                 }
-                requestAnimationFrame(draw);
             }
-            resize(); create(); draw();
-            window.addEventListener('resize', () => { resize(); create(); });
+
+            draw();
+            window.addEventListener('resize', draw);
         })();
 
         // ── Scroll Reveal ──
