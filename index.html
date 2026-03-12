@@ -8,6 +8,10 @@
     <meta property="og:title" content="Terraforge — Alchemy Craft Game">
     <meta property="og:description" content="Start with four elements. End with the Universe.">
     <meta property="og:image" content="images/app-icon.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Terraforge — Alchemy Craft Game">
+    <meta name="twitter:description" content="Start with four elements. End with the Universe.">
     <link rel="icon" href="images/app-icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,8 +53,6 @@
             z-index: 0;
             pointer-events: none;
         }
-
-        /* ── Nebula Overlays ── */
 
         /* ── Z-Layering ── */
         nav, main, section, footer, .hero, .formula-showcase {
@@ -137,7 +139,6 @@
             align-items: center;
         }
         .nav-cta img { height: 40px; width: auto; }
-
 
         /* ── Hero ── */
         .hero {
@@ -516,6 +517,7 @@
             opacity: 0.3;
             filter: blur(6px);
         }
+        .rarity-orb.primordial { background: linear-gradient(135deg, #f87171, #ef4444); }
         .rarity-orb.common { background: #9ca3af; }
         .rarity-orb.uncommon { background: #22c55e; }
         .rarity-orb.rare { background: #3b82f6; }
@@ -936,6 +938,11 @@
             </div>
             <div class="rarity-tiers reveal">
                 <div class="rarity-item">
+                    <div class="rarity-orb primordial"></div>
+                    <span class="rarity-name">Primordial</span>
+                    <span class="rarity-desc">The origin</span>
+                </div>
+                <div class="rarity-item">
                     <div class="rarity-orb common"></div>
                     <span class="rarity-name">Common</span>
                     <span class="rarity-desc">Gentle sparkle</span>
@@ -1062,27 +1069,39 @@
             const canvas = document.getElementById('starfield');
             const ctx = canvas.getContext('2d');
             const STAR_COUNT = 280;
+            let stars = [];
+
+            function createStars() {
+                stars = [];
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    const hasColor = Math.random() < 0.15;
+                    stars.push({
+                        xPct: Math.random(),
+                        yPct: Math.random(),
+                        r: Math.random() * 1.6 + 0.3,
+                        alpha: Math.random() * 0.6 + 0.2,
+                        hue: hasColor ? (Math.random() < 0.5 ? 40 : 260) : 0,
+                        sat: hasColor ? 30 : 0
+                    });
+                }
+            }
 
             function draw() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-                for (let i = 0; i < STAR_COUNT; i++) {
-                    const x = Math.random() * canvas.width;
-                    const y = Math.random() * canvas.height;
-                    const r = Math.random() * 1.6 + 0.3;
-                    const alpha = Math.random() * 0.6 + 0.2;
-                    if (Math.random() < 0.15) {
-                        const hue = Math.random() < 0.5 ? 40 : 260;
-                        ctx.fillStyle = `hsla(${hue}, 30%, 85%, ${alpha})`;
+                for (const s of stars) {
+                    if (s.sat > 0) {
+                        ctx.fillStyle = `hsla(${s.hue}, ${s.sat}%, 85%, ${s.alpha})`;
                     } else {
-                        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
                     }
                     ctx.beginPath();
-                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.arc(s.xPct * canvas.width, s.yPct * canvas.height, s.r, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
+            createStars();
             draw();
             window.addEventListener('resize', draw);
         })();
@@ -1127,6 +1146,8 @@
             });
         }, { threshold: 0.3 });
         counters.forEach(el => counterObserver.observe(el));
+
+
 
     </script>
 </body>

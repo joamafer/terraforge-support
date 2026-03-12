@@ -615,22 +615,32 @@
             const canvas = document.getElementById('starfield');
             const ctx = canvas.getContext('2d');
             const COUNT = 200;
+            let stars = [];
+
+            function createStars() {
+                stars = [];
+                for (let i = 0; i < COUNT; i++) {
+                    stars.push({
+                        xPct: Math.random(),
+                        yPct: Math.random(),
+                        r: Math.random() * 1.4 + 0.3,
+                        alpha: Math.random() * 0.5 + 0.2
+                    });
+                }
+            }
 
             function draw() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-                for (let i = 0; i < COUNT; i++) {
-                    const x = Math.random() * canvas.width;
-                    const y = Math.random() * canvas.height;
-                    const r = Math.random() * 1.4 + 0.3;
-                    const alpha = Math.random() * 0.5 + 0.2;
-                    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+                for (const s of stars) {
+                    ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
                     ctx.beginPath();
-                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.arc(s.xPct * canvas.width, s.yPct * canvas.height, s.r, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
+            createStars();
             draw();
             window.addEventListener('resize', draw);
         })();

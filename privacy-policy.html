@@ -42,15 +42,6 @@
             z-index: 0;
             pointer-events: none;
         }
-        .nebula {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 600px 400px at 15% 20%, rgba(139,92,246,0.06) 0%, transparent 70%),
-                radial-gradient(ellipse 500px 350px at 80% 60%, rgba(45,60,160,0.05) 0%, transparent 70%);
-        }
 
         nav, main, footer { position: relative; z-index: 1; }
 
@@ -233,7 +224,6 @@
 </head>
 <body>
     <canvas id="starfield"></canvas>
-    <div class="nebula"></div>
 
     <!-- Navigation -->
     <nav>
@@ -262,7 +252,7 @@
     <main>
         <div class="container">
             <div class="content-card reveal">
-                <p class="last-updated">Last updated: March 4, 2026</p>
+                <p class="last-updated">Last updated: March 12, 2026</p>
 
                 <div class="highlight-box">
                     <p>Terraforge does not collect, store, or share any personal data. Your privacy is fully protected.</p>
@@ -283,7 +273,7 @@
                 </ul>
 
                 <h2>Local Storage</h2>
-                <p>Your game progress — discovered elements, milestones, and preferences — is stored locally on your device using the Keychain. This data never leaves your device and is not transmitted to any server or third party.</p>
+                <p>Your game progress — discovered elements, milestones, and preferences — is stored locally on your device using the Keychain. This data is not transmitted to any server or third party. If you have iCloud Keychain enabled on your device, iOS may sync Keychain items across your devices as part of Apple's standard behavior.</p>
 
                 <h2>iCloud Sync</h2>
                 <p>If you have iCloud enabled, Terraforge will sync your game progress across your devices using Apple's iCloud Key-Value Storage. This data is managed entirely by Apple and is not accessible to us. You can disable iCloud sync in your device settings.</p>
@@ -292,13 +282,13 @@
                 <p>Terraforge offers an optional one-time purchase (Master Forger). This transaction is handled entirely by Apple through the App Store. We do not process, store, or have access to any payment information.</p>
 
                 <h2>Game Center</h2>
-                <p>Terraforge supports Game Center for leaderboards. Game Center is managed entirely by Apple. We do not access or store your Game Center profile information.</p>
+                <p>Terraforge supports Game Center for leaderboards. Game Center is managed entirely by Apple. Your Game Center alias and discovery count may be visible to other players on the leaderboard. We do not access or store your Game Center profile information.</p>
 
                 <h2>No Account Required</h2>
                 <p>Terraforge does not require you to create an account or sign in. All features are available immediately after download with no registration needed.</p>
 
                 <h2>Offline Functionality</h2>
-                <p>Terraforge works completely offline. No internet connection is required to play the game. This means no data is transmitted from your device while using the app.</p>
+                <p>Terraforge works completely offline. No internet connection is required to play the game. Terraforge itself does not transmit any data to external servers. When online, only Apple's own services (iCloud, Game Center, and the App Store) may communicate as part of their standard functionality.</p>
 
                 <h2>No Third-Party Services</h2>
                 <p>We do not integrate any third-party analytics, advertising, or tracking services. There are no SDKs in Terraforge that collect or transmit your data.</p>
@@ -330,45 +320,39 @@
     </footer>
 
     <script>
-        // ── Canvas Starfield ──
+        // ── Static Canvas Starfield ──
         (function() {
             const canvas = document.getElementById('starfield');
             const ctx = canvas.getContext('2d');
-            let stars = [];
             const COUNT = 180;
+            let stars = [];
 
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            function create() {
+            function createStars() {
                 stars = [];
                 for (let i = 0; i < COUNT; i++) {
                     stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
+                        xPct: Math.random(),
+                        yPct: Math.random(),
                         r: Math.random() * 1.4 + 0.3,
-                        alpha: Math.random() * 0.5 + 0.2,
-                        speed: Math.random() * 0.012 + 0.003,
-                        offset: Math.random() * Math.PI * 2
+                        alpha: Math.random() * 0.5 + 0.2
                     });
                 }
             }
-            let t = 0;
+
             function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                t += 0.016;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
                 for (const s of stars) {
-                    const a = s.alpha + Math.sin(t * s.speed * 60 + s.offset) * 0.18;
-                    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.05, a)})`;
+                    ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.arc(s.xPct * canvas.width, s.yPct * canvas.height, s.r, 0, Math.PI * 2);
                     ctx.fill();
                 }
-                requestAnimationFrame(draw);
             }
-            resize(); create(); draw();
-            window.addEventListener('resize', () => { resize(); create(); });
+
+            createStars();
+            draw();
+            window.addEventListener('resize', draw);
         })();
 
         // ── Scroll Reveal ──
