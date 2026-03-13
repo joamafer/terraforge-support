@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Kit — Terraforge</title>
+    <meta name="description" content="Terraforge press kit. Screenshots, app icon, key facts, and downloadable assets.">
+    <link rel="icon" href="images/app-icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0A0814;
+            --bg-card: rgba(16, 13, 28, 0.7);
+            --text-primary: #f0eff4;
+            --text-secondary: #8a8899;
+            --gold: #D4A03C;
+            --gold-light: #F5D77A;
+            --purple: #8B5CF6;
+            --green: #34d399;
+            --border: rgba(255, 255, 255, 0.06);
+            --gradient-gold-purple: linear-gradient(135deg, #D4A03C 0%, #8B5CF6 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #starfield {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        nav, main, footer { position: relative; z-index: 1; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            background: rgba(10,8,20,0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+        .logo img { width: 34px; height: 34px; border-radius: 8px; }
+        .logo span {
+            background: var(--gradient-gold-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-cta { display: inline-flex; align-items: center; }
+        .nav-cta img { height: 40px; width: auto; }
+
+        /* ── Scroll Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+                        transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Page Header ── */
+        .page-header {
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .page-header h1 .gradient {
+            background: var(--gradient-gold-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ── Main Content ── */
+        main { padding: 0 0 80px; }
+
+        .section { margin-bottom: 56px; }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title svg { width: 22px; height: 22px; color: var(--gold); }
+
+        /* ── Download Banner ── */
+        .download-banner {
+            background: rgba(212,160,60,0.06);
+            border: 1px solid rgba(212,160,60,0.12);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .download-banner h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .download-banner p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+        }
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold);
+            color: #0A0814;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(212,160,60,0.25);
+            text-decoration: none;
+        }
+        .btn-download svg { width: 20px; height: 20px; }
+
+        /* ── Fact Sheet ── */
+        .fact-sheet {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+        }
+        .fact-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 0;
+        }
+        .fact-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .fact-value {
+            font-size: 0.92rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .fact-grid > :nth-last-child(-n+2) { border-bottom: none; }
+
+        /* ── Description ── */
+        .description-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+        }
+        .description-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 14px;
+        }
+        .description-card p:last-child { margin-bottom: 0; }
+        .description-card strong { color: var(--text-primary); }
+        .pitch {
+            font-size: 1.05rem;
+            color: var(--gold-light) !important;
+            font-weight: 500;
+            margin-bottom: 20px !important;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ── App Icon ── */
+        .icon-preview {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .icon-preview img {
+            width: 180px;
+            height: 180px;
+            border-radius: 40px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+        }
+        .icon-info p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+        }
+        .icon-info a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+        .icon-info a:hover { text-decoration: underline; }
+
+        /* ── Screenshots ── */
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .screenshot-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+        .screenshot-card:hover { transform: translateY(-4px); }
+        .screenshot-card img {
+            width: 100%;
+            display: block;
+        }
+        .screenshot-card p {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ── Contact ── */
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+        }
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+        }
+        .contact-card a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .contact-card a:hover { text-decoration: underline; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-links { margin-bottom: 16px; }
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text-primary); }
+        footer > p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header { padding: 120px 0 40px; }
+            .fact-grid { grid-template-columns: 120px 1fr; }
+            .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+            .icon-preview { flex-direction: column; text-align: center; }
+            .icon-preview img { width: 140px; height: 140px; border-radius: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/app-icon.png" alt="Terraforge">
+                <span>Terraforge</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+            <a href="https://apps.apple.com/app/id6759879809" class="nav-cta">
+                <img src="images/app-store-badge.svg" alt="Download on the App Store">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Press <span class="gradient">Kit</span></h1>
+        <p>Everything you need to cover Terraforge.</p>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- Download All -->
+            <div class="download-banner reveal">
+                <h2>Download All Assets</h2>
+                <p>App icon (1024x1024), hero art, and full-resolution screenshots in one ZIP.</p>
+                <a href="press/Terraforge-Press-Kit.zip" class="btn-download">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Download Press Kit (ZIP)
+                </a>
+            </div>
+
+            <!-- Description -->
+            <div class="section reveal">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
+                    About Terraforge
+                </h2>
+                <div class="description-card">
+                    <p class="pitch">Start with Fire, Water, Air, and Earth. Combine elements to discover Dragons, Galaxies, and the Universe itself.</p>
+                    <p>Terraforge is an element-combining puzzle game set in 2500 AD, where humanity's last alchemist must rebuild civilization on a barren planet. Players begin with four primordial elements and forge their way through <strong>208 elements</strong> across <strong>266 recipes</strong> and <strong>13 tiers of discovery</strong>.</p>
+                    <p>Every recipe follows real-world logic. Every discovery is accompanied by rarity-scaled particle effects, haptic feedback, and synthesized sound — all generated at runtime. Six rarity tiers reward curiosity with increasingly spectacular celebrations, from a gentle sparkle for Common elements to screen-shaking gold rain for Legendary ones.</p>
+                    <p>Built entirely in SwiftUI with zero third-party dependencies. The generative ambient soundtrack, discovery chimes, and all sound effects are synthesized at runtime via AVAudioEngine. CoreHaptics patterns scale from a subtle tap to a legendary rumble. iCloud syncs progress across devices. Game Center ranks discoveries globally.</p>
+                    <p>Fully localized in English, Spanish, and Brazilian Portuguese — including all 208 element names, descriptions, and lore. VoiceOver supported. Reduce Motion honored. Zero data collected.</p>
+                </div>
+            </div>
+
+            <!-- Fact Sheet -->
+            <div class="section reveal">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    Fact Sheet
+                </h2>
+                <div class="fact-sheet">
+                    <div class="fact-grid">
+                        <div class="fact-label">Title</div>
+                        <div class="fact-value">Terraforge: Alchemy Craft Game</div>
+                        <div class="fact-label">Developer</div>
+                        <div class="fact-value">Jose Antonio Martinez Fernandez (Solo developer)</div>
+                        <div class="fact-label">Platforms</div>
+                        <div class="fact-value">iOS (iPhone &amp; iPad)</div>
+                        <div class="fact-label">Release</div>
+                        <div class="fact-value">April 2026</div>
+                        <div class="fact-label">Price</div>
+                        <div class="fact-value">Free with optional one-time purchase ($4.99)</div>
+                        <div class="fact-label">Genre</div>
+                        <div class="fact-value">Puzzle / Alchemy / Discovery</div>
+                        <div class="fact-label">Content</div>
+                        <div class="fact-value">208 elements, 266 recipes, 13 tiers, 31 milestones, 16 categories</div>
+                        <div class="fact-label">Rarity Tiers</div>
+                        <div class="fact-value">6 — Primordial, Common, Uncommon, Rare, Epic, Legendary</div>
+                        <div class="fact-label">Languages</div>
+                        <div class="fact-value">English, Spanish, Brazilian Portuguese</div>
+                        <div class="fact-label">Accessibility</div>
+                        <div class="fact-value">VoiceOver, Reduce Motion, Dynamic Type</div>
+                        <div class="fact-label">Privacy</div>
+                        <div class="fact-value">Zero data collected. No ads. No tracking. No third-party SDKs.</div>
+                        <div class="fact-label">Frameworks</div>
+                        <div class="fact-value">SwiftUI, AVAudioEngine, CoreHaptics, GameKit, StoreKit 2, CloudKit</div>
+                        <div class="fact-label">Website</div>
+                        <div class="fact-value"><a href="index.html" style="color:var(--gold);text-decoration:none;">terraforge.app</a></div>
+                        <div class="fact-label">Contact</div>
+                        <div class="fact-value"><a href="mailto:joamaferapps@gmail.com" style="color:var(--gold);text-decoration:none;">joamaferapps@gmail.com</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Icon -->
+            <div class="section reveal">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    App Icon
+                </h2>
+                <div class="icon-preview">
+                    <img src="press/app-icon-1024.png" alt="Terraforge App Icon">
+                    <div class="icon-info">
+                        <p><strong style="color:var(--text-primary)">1024 &times; 1024 px</strong> &mdash; PNG</p>
+                        <p>Rounded corners are applied by iOS automatically.</p>
+                        <a href="press/app-icon-1024.png" download>Download full resolution</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="section reveal">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                    </svg>
+                    Screenshots
+                </h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:16px;">Full resolution (1320 &times; 2868 px). Click to download.</p>
+                <div class="screenshots-grid">
+                    <div class="screenshot-card">
+                        <a href="press/screenshot-forge.png" download>
+                            <img src="screenshots/01-forge.png" alt="The Forge" loading="lazy">
+                        </a>
+                        <p>The Forge</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <a href="press/screenshot-grimoire.png" download>
+                            <img src="screenshots/02-grimoire.png" alt="Grimoire" loading="lazy">
+                        </a>
+                        <p>Grimoire</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <a href="press/screenshot-element.png" download>
+                            <img src="screenshots/03-element.png" alt="Element Detail" loading="lazy">
+                        </a>
+                        <p>Element Detail</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <a href="press/screenshot-milestones.png" download>
+                            <img src="screenshots/04-milestones.png" alt="Milestones" loading="lazy">
+                        </a>
+                        <p>Milestones</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="section reveal">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Contact
+                </h2>
+                <div class="contact-card">
+                    <p><strong style="color:var(--text-primary)">Jose Antonio Martinez Fernandez</strong></p>
+                    <p>Solo developer &mdash; design, code, lore, and audio</p>
+                    <p><a href="mailto:joamaferapps@gmail.com">joamaferapps@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="support.html">Support</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:joamaferapps@gmail.com">Contact</a>
+        </div>
+        <p>&copy; 2026 Terraforge. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ── Static Canvas Starfield ──
+        (function() {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            const COUNT = 180;
+            let stars = [];
+
+            function createStars() {
+                stars = [];
+                for (let i = 0; i < COUNT; i++) {
+                    stars.push({
+                        xPct: Math.random(),
+                        yPct: Math.random(),
+                        r: Math.random() * 1.4 + 0.3,
+                        alpha: Math.random() * 0.5 + 0.2
+                    });
+                }
+            }
+
+            function draw() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                for (const s of stars) {
+                    ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(s.xPct * canvas.width, s.yPct * canvas.height, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            createStars();
+            draw();
+            window.addEventListener('resize', draw);
+        })();
+
+        // ── Scroll Reveal ──
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
