@@ -248,58 +248,77 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1>Privacy <span class="gradient">Policy</span></h1>
-        <p>Zero data collection. By design.</p>
+        <p>No ads. No analytics. No tracking.</p>
     </div>
 
     <main>
         <div class="container">
             <div class="content-card reveal">
-                <p class="last-updated">Last updated: March 12, 2026</p>
+                <p class="last-updated">Last updated: September 20, 2026</p>
 
                 <div class="highlight-box">
-                    <p>Terraforge does not collect, store, or share any personal data. Your privacy is fully protected.</p>
+                    <p>No ads. No analytics. No tracking SDKs. Terraforge runs no servers of its own — the only data that ever leaves your device goes to Apple or Google to power the features you choose to use.</p>
                 </div>
 
                 <h2>Overview</h2>
-                <p>Terraforge is an element combination game designed with privacy as a core principle. We believe you should be able to enjoy our game without any concerns about your personal information.</p>
+                <p>Terraforge is an element combination game designed with privacy as a core principle. This policy covers both the iOS version (App Store) and the Android version (Google Play). Terraforge has no backend of its own: we operate no servers, no accounts, and no databases. Where data does leave your device, it goes to Apple's or Google's own platform services — iCloud and Game Center on iOS, Google Play Games Services and Google Play Billing on Android — and only for features you opt into.</p>
 
                 <h2>Data We Don't Collect</h2>
-                <p>To be completely clear, Terraforge does <strong style="color:var(--text-primary)">not</strong> collect:</p>
+                <p>Terraforge does <strong style="color:var(--text-primary)">not</strong> collect:</p>
                 <ul>
-                    <li>Personal identification information (name, email, phone number)</li>
-                    <li>Location data</li>
-                    <li>Usage analytics or behavior tracking</li>
-                    <li>Device identifiers for advertising</li>
-                    <li>Game progress or play patterns</li>
-                    <li>Any data that could identify you personally</li>
+                    <li>Your name, email address, or phone number</li>
+                    <li>Location data of any kind</li>
+                    <li>Usage analytics, behavioural tracking, or crash telemetry</li>
+                    <li>Advertising identifiers (the app uses no advertising ID and shows no ads)</li>
+                    <li>Contacts, photos, files, messages, or calendar data</li>
+                    <li>Any data sold or shared with third-party companies</li>
                 </ul>
+                <p>There are no third-party analytics, advertising, or tracking SDKs in Terraforge on either platform.</p>
 
                 <h2>Local Storage</h2>
-                <p>Your game progress — discovered elements, milestones, and preferences — is stored locally on your device using the Keychain. This data is not transmitted to any server or third party. If you have iCloud Keychain enabled on your device, iOS may sync Keychain items across your devices as part of Apple's standard behavior.</p>
+                <p>Your game progress — discovered elements, milestones, and preferences — is stored on your device. On iOS this uses the Keychain; if you have iCloud Keychain enabled, iOS may sync Keychain items across your devices as part of Apple's standard behaviour. On Android this uses local app storage (Jetpack DataStore), which is removed when you uninstall the app.</p>
 
-                <h2>iCloud Sync</h2>
-                <p>If you have iCloud enabled, Terraforge will sync your game progress across your devices using Apple's iCloud Key-Value Storage. This data is managed entirely by Apple and is not accessible to us. You can disable iCloud sync in your device settings.</p>
+                <h2>Cloud Sync</h2>
+                <p><strong style="color:var(--text-primary)">iOS.</strong> If you have iCloud enabled, Terraforge syncs your progress across your devices using Apple's iCloud Key-Value Storage. This data is managed entirely by Apple and is not accessible to us. You can disable iCloud sync in your device settings.</p>
+                <p><strong style="color:var(--text-primary)">Android.</strong> If you sign in to Google Play Games, Terraforge saves your progress to Google Play Games Saved Games (Snapshots), which stores it in your own Google account. This lets you continue on another device. The saved data contains only game state — discovered elements, milestones, and settings. We have no access to it; it lives in your Google account, not on any server of ours. If you decline the Play Games sign-in, no progress leaves your device and the game remains fully playable.</p>
+
+                <h2>Leaderboards and Player Profile</h2>
+                <p><strong style="color:var(--text-primary)">iOS.</strong> Terraforge supports Game Center leaderboards. Game Center is managed entirely by Apple. Your Game Center alias and discovery count may be visible to other players on the leaderboard. We do not access or store your Game Center profile information.</p>
+                <p><strong style="color:var(--text-primary)">Android.</strong> Terraforge supports Google Play Games Services leaderboards. If you sign in, your Play Games gamer name and discovery count may be visible to other players on the leaderboard, and your Play Games player ID is used to attribute your score and your cloud save. Your Play Games profile and its visibility are controlled by you in the Google Play Games app, not by Terraforge. Sign-in is optional and is never required to play.</p>
 
                 <h2>In-App Purchases</h2>
-                <p>Terraforge offers an optional one-time purchase (Master Forger). This transaction is handled entirely by Apple through the App Store. We do not process, store, or have access to any payment information.</p>
+                <p>Terraforge offers one optional one-time purchase (Master Forger). The transaction is handled entirely by Apple through the App Store or by Google through Google Play Billing. We never see, process, or store your payment details. The app checks your purchase status with the store so it knows whether to unlock the content; that status — whether or not you own Master Forger — is the only purchase information the app handles, and it is used solely to unlock what you paid for.</p>
 
-                <h2>Game Center</h2>
-                <p>Terraforge supports Game Center for leaderboards. Game Center is managed entirely by Apple. Your Game Center alias and discovery count may be visible to other players on the leaderboard. We do not access or store your Game Center profile information.</p>
+                <h2>What This Means for Google Play's Data Safety Labels</h2>
+                <p>Google Play asks developers to declare any data that leaves the device, even when it is handled by Google's own services. For completeness, the Android version's declaration is:</p>
+                <ul>
+                    <li><strong style="color:var(--text-primary)">User IDs</strong> — your Google Play Games player ID, if you choose to sign in. Used for sign-in, leaderboards, and cloud save. Optional.</li>
+                    <li><strong style="color:var(--text-primary)">Gameplay activity</strong> — your game progress, if you choose to sign in, stored as a Play Games Saved Game in your own Google account. Optional.</li>
+                    <li><strong style="color:var(--text-primary)">Purchase history</strong> — whether you own the Master Forger unlock, handled by Google Play Billing. Optional; applies only if you make the purchase.</li>
+                </ul>
+                <p>All of it is transmitted over an encrypted connection, none of it is shared with third-party companies, and none of it reaches a server operated by us.</p>
+
+                <h2>Deleting Your Data</h2>
+                <p>Because Terraforge stores nothing on our own servers, you can delete everything yourself at any time:</p>
+                <ul>
+                    <li><strong style="color:var(--text-primary)">On-device progress.</strong> Use Settings → Reset All Progress inside the app, or uninstall Terraforge. Both remove all locally stored game data immediately.</li>
+                    <li><strong style="color:var(--text-primary)">Android cloud save.</strong> Open the Google Play Games app → Settings → Delete Play Games account &amp; data, and choose to delete the data for Terraforge. This permanently removes your Saved Game and your leaderboard entries for the game from your Google account.</li>
+                    <li><strong style="color:var(--text-primary)">iOS cloud save.</strong> Turn off iCloud for Terraforge in iOS Settings, or delete the app's iCloud data from Settings → Apple ID → iCloud → Manage Storage. Game Center scores can be removed by deleting your Game Center data through Apple.</li>
+                    <li><strong style="color:var(--text-primary)">Purchase records.</strong> Records of a purchase are retained by Apple or Google as required for their billing, tax, and refund obligations. Those records are held by them, under their own policies, and we cannot delete them.</li>
+                </ul>
+                <p>We hold no copy of any of this data, so there is nothing for us to retain after you delete it. If you want help with any of the steps above, email <a href="mailto:joamaferapps@gmail.com">joamaferapps@gmail.com</a> and we will walk you through it.</p>
 
                 <h2>No Account Required</h2>
-                <p>Terraforge does not require you to create an account or sign in. All features are available immediately after download with no registration needed.</p>
+                <p>Terraforge never asks you to create an account, register, or give us a password. On Android the system may offer a one-time Google Play Games sign-in prompt; declining it costs you nothing but cloud save and leaderboards, and every other feature stays available.</p>
 
                 <h2>Offline Functionality</h2>
-                <p>Terraforge works completely offline. No internet connection is required to play the game. Terraforge itself does not transmit any data to external servers. When online, only Apple's own services (iCloud, Game Center, and the App Store) may communicate as part of their standard functionality.</p>
-
-                <h2>No Third-Party Services</h2>
-                <p>We do not integrate any third-party analytics, advertising, or tracking services. There are no SDKs in Terraforge that collect or transmit your data.</p>
+                <p>Terraforge plays completely offline. No internet connection is required. The app itself transmits nothing to external servers. When you are online, only Apple's and Google's own services — iCloud, Game Center, Google Play Games Services, and the App Store or Google Play — may communicate as part of their standard functionality.</p>
 
                 <h2>Children's Privacy</h2>
-                <p>Terraforge does not collect personal information from anyone, including children under 13. The game is safe for users of all ages.</p>
+                <p>Terraforge is a general-audience game and does not knowingly collect personal information from children under 13. The Android version is rated for a 13+ target age group on Google Play. Cloud save and leaderboards depend on a Google or Apple account, whose age requirements are set by those platforms.</p>
 
                 <h2>Changes to This Policy</h2>
-                <p>If we ever change our privacy practices, we will update this policy and the "Last updated" date above. Given our commitment to not collecting data, we do not anticipate significant changes.</p>
+                <p>If we change our privacy practices, we will update this policy and the "Last updated" date above.</p>
 
                 <h2>Contact Us</h2>
                 <p>If you have any questions about this Privacy Policy, please contact us at:</p>
