@@ -96,8 +96,10 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--text-primary); }
-        .nav-cta { display: inline-flex; align-items: center; }
-        .nav-cta img { height: 40px; width: auto; }
+        .store-badges { display: inline-flex; align-items: center; gap: 2px; flex-wrap: nowrap; }
+        .store-badge { display: inline-flex; align-items: center; line-height: 0; }
+        .store-badge img { height: 40px; width: auto; display: block; }
+        .store-badge.play img { height: 59px; }
 
         /* ── Scroll Reveal ── */
         .reveal {
@@ -326,13 +328,27 @@
         }
 
         /* ── Responsive ── */
-        @media (max-width: 768px) {
+        @media (max-width: 980px) {
             .nav-links { display: none; }
+        }
+
+        @media (max-width: 768px) {
             .page-header { padding: 120px 0 40px; }
             .fact-grid { grid-template-columns: 120px 1fr; }
             .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
             .icon-preview { flex-direction: column; text-align: center; }
             .icon-preview img { width: 140px; height: 140px; border-radius: 32px; }
+        }
+
+        @media (max-width: 720px) {
+            nav { padding: 12px 0; }
+            nav .container {
+                flex-wrap: wrap;
+                row-gap: 8px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .page-header { padding-top: 176px; }
         }
     </style>
 </head>
@@ -351,9 +367,14 @@
                 <li><a href="index.html#features">Features</a></li>
                 <li><a href="support.html">Support</a></li>
             </ul>
-            <a href="https://apps.apple.com/app/id6759879809" class="nav-cta">
-                <img src="images/app-store-badge.svg" alt="Download on the App Store">
-            </a>
+            <div class="store-badges">
+                <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                    <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                    <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -389,8 +410,9 @@
                     <p class="pitch">Start with Fire, Water, Air, and Earth. Combine elements to discover Dragons, Galaxies, and the Universe itself.</p>
                     <p>Terraforge is an element-combining puzzle game set in 2500 AD, where humanity's last alchemist must rebuild civilization on a barren planet. Players begin with four primordial elements and forge their way through <strong>208 elements</strong> across <strong>266 recipes</strong> and <strong>13 tiers of discovery</strong>.</p>
                     <p>Every recipe follows real-world logic. Every discovery is accompanied by rarity-scaled particle effects, haptic feedback, and synthesized sound — all generated at runtime. Six rarity tiers reward curiosity with increasingly spectacular celebrations, from a gentle sparkle for Common elements to screen-shaking gold rain for Legendary ones.</p>
-                    <p>Built entirely in SwiftUI with zero third-party dependencies. The generative ambient soundtrack, discovery chimes, and all sound effects are synthesized at runtime via AVAudioEngine. CoreHaptics patterns scale from a subtle tap to a legendary rumble. iCloud syncs progress across devices. Game Center ranks discoveries globally.</p>
-                    <p>Fully localized in English, Spanish, and Brazilian Portuguese — including all 208 element names, descriptions, and lore. VoiceOver supported. Reduce Motion honored. Zero data collected.</p>
+                    <p>The iOS version is built in SwiftUI. Its soundtrack, discovery chimes, and sound effects are synthesized at runtime with AVAudioEngine, and CoreHaptics scales from a light tap to a legendary rumble. iCloud syncs progress across Apple devices. Game Center ranks discoveries globally.</p>
+                    <p>The Android version is built in Kotlin and Jetpack Compose, for phones and tablets on Android 10 and later. Sound is synthesized at runtime, and haptic feedback scales with rarity. Signing in to Google Play Games saves progress to your Google account and ranks discoveries on the leaderboard. Declining that sign-in leaves the full game playable, with progress stored only on the device.</p>
+                    <p>Fully localized in English, Spanish, Brazilian Portuguese, French, German, and Japanese — including all 208 element names, descriptions, and lore. VoiceOver and TalkBack are supported. Reduce Motion on iOS and Remove animations on Android are honored. No ads, no tracking, and no analytics.</p>
                 </div>
             </div>
 
@@ -409,9 +431,11 @@
                         <div class="fact-label">Developer</div>
                         <div class="fact-value">Jose Antonio Martinez Fernandez (Solo developer)</div>
                         <div class="fact-label">Platforms</div>
-                        <div class="fact-value">iOS (iPhone &amp; iPad)</div>
+                        <div class="fact-value">iOS (iPhone &amp; iPad) and Android 10+ (phones &amp; tablets)</div>
+                        <div class="fact-label">Stores</div>
+                        <div class="fact-value"><a href="https://apps.apple.com/app/id6759879809" style="color:var(--gold);text-decoration:none;">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" style="color:var(--gold);text-decoration:none;">Google Play</a></div>
                         <div class="fact-label">Release</div>
-                        <div class="fact-value">April 2026</div>
+                        <div class="fact-value">iOS — April 2026. Android — October 2026</div>
                         <div class="fact-label">Price</div>
                         <div class="fact-value">Free with optional one-time purchase ($4.99)</div>
                         <div class="fact-label">Genre</div>
@@ -421,13 +445,13 @@
                         <div class="fact-label">Rarity Tiers</div>
                         <div class="fact-value">6 — Primordial, Common, Uncommon, Rare, Epic, Legendary</div>
                         <div class="fact-label">Languages</div>
-                        <div class="fact-value">English, Spanish, Brazilian Portuguese</div>
+                        <div class="fact-value">English, Spanish, Brazilian Portuguese, French, German, Japanese</div>
                         <div class="fact-label">Accessibility</div>
-                        <div class="fact-value">VoiceOver, Reduce Motion, Dynamic Type</div>
+                        <div class="fact-value">VoiceOver, TalkBack, Reduce Motion, Remove animations, Dynamic Type, system font scaling</div>
                         <div class="fact-label">Privacy</div>
-                        <div class="fact-value">Zero data collected. No ads. No tracking. No third-party SDKs.</div>
+                        <div class="fact-value">No ads, no tracking, no analytics. Optional cloud save and leaderboards are handled by Apple or Google.</div>
                         <div class="fact-label">Frameworks</div>
-                        <div class="fact-value">SwiftUI, AVAudioEngine, CoreHaptics, GameKit, StoreKit 2, CloudKit</div>
+                        <div class="fact-value">iOS — SwiftUI, AVAudioEngine, CoreHaptics, GameKit, StoreKit 2, iCloud. Android — Kotlin, Jetpack Compose, Jetpack DataStore, Google Play Billing, Google Play Games.</div>
                         <div class="fact-label">Website</div>
                         <div class="fact-value"><a href="index.html" style="color:var(--gold);text-decoration:none;">terraforge.app</a></div>
                         <div class="fact-label">Contact</div>
@@ -448,7 +472,7 @@
                     <img src="press/app-icon-1024.png" alt="Terraforge App Icon">
                     <div class="icon-info">
                         <p><strong style="color:var(--text-primary)">1024 &times; 1024 px</strong> &mdash; PNG</p>
-                        <p>Rounded corners are applied by iOS automatically.</p>
+                        <p>iOS and Google Play apply their own icon mask.</p>
                         <a href="press/app-icon-1024.png" download>Download full resolution</a>
                     </div>
                 </div>
@@ -462,7 +486,7 @@
                     </svg>
                     Screenshots
                 </h2>
-                <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:16px;">Full resolution (1320 &times; 2868 px). Click to download.</p>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:16px;">iPhone screenshots, full resolution (1320 &times; 2868 px). Click to download.</p>
                 <div class="screenshots-grid">
                     <div class="screenshot-card">
                         <a href="press/screenshot-forge.png" download>

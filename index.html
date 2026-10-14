@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terraforge — Alchemy Craft Game</title>
-    <meta name="description" content="Start with Fire, Water, Air, and Earth. Combine elements to create Dragons, Galaxies, and the Universe. 208 elements, 266 recipes. Free for iOS.">
+    <meta name="description" content="Start with Fire, Water, Air, and Earth. Combine elements to create Dragons, Galaxies, and the Universe. 208 elements, 266 recipes. Free on iOS and Android.">
     <meta property="og:title" content="Terraforge — Alchemy Craft Game">
     <meta property="og:description" content="Start with four elements. End with the Universe.">
     <meta property="og:image" content="images/app-icon.png">
@@ -135,11 +135,27 @@
         }
         .nav-links a:hover { color: var(--text-primary); }
 
-        .nav-cta {
+        .store-badges {
             display: inline-flex;
             align-items: center;
+            gap: 2px;
+            flex-wrap: nowrap;
         }
-        .nav-cta img { height: 40px; width: auto; }
+        .store-badges.large { flex-wrap: wrap; }
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            line-height: 0;
+            transition: transform 0.3s, opacity 0.2s;
+        }
+        .store-badge:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+        .store-badge img { height: 40px; width: auto; display: block; }
+        .store-badge.play img { height: 59px; }
+        .store-badges.large .store-badge img { height: 52px; }
+        .store-badges.large .store-badge.play img { height: 77px; }
 
         /* ── Hero ── */
         .hero {
@@ -194,18 +210,6 @@
             flex-wrap: wrap;
             align-items: center;
         }
-
-        .app-store-badge {
-            display: inline-flex;
-            align-items: center;
-            transition: transform 0.3s, opacity 0.2s;
-        }
-        .app-store-badge:hover {
-            transform: translateY(-3px);
-            opacity: 0.9;
-        }
-        .app-store-badge img { height: 52px; width: auto; }
-        .app-store-badge.small img { height: 40px; }
 
         .btn-ghost {
             display: inline-flex;
@@ -668,6 +672,7 @@
             font-size: 1.15rem;
             margin-bottom: 40px;
         }
+        .cta .store-badges { justify-content: center; width: 100%; }
 
         /* ── Footer ── */
         footer {
@@ -697,6 +702,10 @@
         }
 
         /* ── Responsive ── */
+        @media (max-width: 1100px) {
+            .nav-links { display: none; }
+        }
+
         @media (max-width: 1024px) {
             .hero .container {
                 grid-template-columns: 1fr;
@@ -741,6 +750,20 @@
         @media (max-width: 480px) {
             .hero-content h1 { font-size: 1.9rem; }
             .formula-showcase { padding: 0 0 40px; }
+            .store-badges.large .store-badge img { height: 40px; }
+            .store-badges.large .store-badge.play img { height: 59px; }
+            .store-badges.large { flex-wrap: nowrap; }
+        }
+
+        @media (max-width: 720px) {
+            nav { padding: 12px 0; }
+            nav .container {
+                flex-wrap: wrap;
+                row-gap: 8px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .hero { padding-top: 168px; }
         }
     </style>
 </head>
@@ -761,9 +784,14 @@
                 <li><a href="#screenshots">Screenshots</a></li>
                 <li><a href="support.html">Support</a></li>
             </ul>
-            <a href="https://apps.apple.com/app/id6759879809" class="nav-cta app-store-badge small">
-                <img src="images/app-store-badge.svg" alt="Download on the App Store">
-            </a>
+            <div class="store-badges">
+                <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                    <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                    <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -775,9 +803,14 @@
                 <p class="subtitle">Start with Fire, Water, Air, and Earth. Combine elements to discover Dragons, Galaxies, and the Universe itself.</p>
                 <p class="hero-tagline">Every recipe makes sense. Every discovery feels earned.</p>
                 <div class="hero-buttons">
-                    <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge">
-                        <img src="images/app-store-badge.svg" alt="Download on the App Store">
-                    </a>
+                    <div class="store-badges large">
+                        <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                            <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                            <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                        </a>
+                    </div>
                     <a href="#how-it-works" class="btn-ghost">Learn More</a>
                 </div>
             </div>
@@ -831,14 +864,14 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2>Simple to start, impossible to stop</h2>
-                <p>Drag, combine, discover. The forge does the rest.</p>
+                <p>Tap, combine, discover. The forge does the rest.</p>
             </div>
             <div class="steps-grid">
                 <div class="step-card reveal">
                     <span class="step-icon">⚗️</span>
                     <div class="step-number">1</div>
                     <h3>Combine</h3>
-                    <p>Drag any two elements together on the forge. Water + Earth? That's Mud. Fire + Mud? Brick. Every recipe follows real-world logic.</p>
+                    <p>Tap an element to set it on a forge plate. Fill both plates and they combine. On iPhone and iPad you can drag an element onto a plate as well. Water + Earth? That's Mud. Fire + Mud? Brick.</p>
                 </div>
                 <div class="step-card reveal">
                     <span class="step-icon">📖</span>
@@ -850,7 +883,7 @@
                     <span class="step-icon">🏆</span>
                     <div class="step-number">3</div>
                     <h3>Master</h3>
-                    <p>Chase 31 milestones from your first Plant to forging the Universe. Climb 13 tiers and compete on the Game Center leaderboard.</p>
+                    <p>Chase 31 milestones from your first Plant to forging the Universe. Climb 13 tiers and compete on the Game Center and Google Play Games leaderboards.</p>
                 </div>
             </div>
         </div>
@@ -861,13 +894,13 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2>Every combination is a discovery</h2>
-                <p>Drag elements together and watch mud become life, life become civilization, and civilization become legend.</p>
+                <p>Put elements together and watch mud become life, life become civilization, and civilization become legend.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card reveal">
                     <div class="feature-icon gold">⚗️</div>
                     <h3>Intuitive Forging</h3>
-                    <p>Drag any two elements together to discover what they create. Water + Earth = Mud. Day + Night = Time. Every recipe makes sense.</p>
+                    <p>Tap two elements onto the forge to discover what they create. On iPhone and iPad you can drag one onto a plate instead. Water + Earth = Mud. Day + Night = Time.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="feature-icon purple">📖</div>
@@ -887,12 +920,12 @@
                 <div class="feature-card reveal">
                     <div class="feature-icon green">📡</div>
                     <h3>Works Offline</h3>
-                    <p>100% offline. No internet, no accounts, no ads. Your progress syncs across devices via iCloud when you're back online.</p>
+                    <p>100% offline. No internet required, and no ads. iPhone and iPad sync through iCloud. On Android, Google Play Games saves progress across devices if you sign in.</p>
                 </div>
                 <div class="feature-card reveal">
                     <div class="feature-icon pink">🔒</div>
                     <h3>Zero Data Collection</h3>
-                    <p>No analytics, no tracking, no third-party SDKs. Your discoveries stay on your device. Privacy by design.</p>
+                    <p>No analytics, no tracking, no ads. Discoveries stay on your device. Cloud save and leaderboards, if you use them, stay with Apple or Google.</p>
                 </div>
             </div>
         </div>
@@ -1003,12 +1036,17 @@
                         </li>
                         <li>
                             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            31 milestones & Game Center
+                            31 milestones & leaderboards
                         </li>
                     </ul>
-                    <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge small" style="margin-top:16px;">
-                        <img src="images/app-store-badge.svg" alt="Download on the App Store">
-                    </a>
+                    <div class="store-badges" style="margin-top:16px;">
+                        <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                            <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                            <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                        </a>
+                    </div>
                 </div>
                 <div class="pricing-card featured">
                     <div class="pricing-badge premium">One-Time Purchase</div>
@@ -1033,9 +1071,14 @@
                             All future content included
                         </li>
                     </ul>
-                    <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge small" style="margin-top:16px;">
-                        <img src="images/app-store-badge.svg" alt="Download on the App Store">
-                    </a>
+                    <div class="store-badges" style="margin-top:16px;">
+                        <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                            <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                            <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1046,9 +1089,14 @@
         <div class="container">
             <h2>Create <span class="gradient">everything</span> from nothing</h2>
             <p>Start with four elements. End with the Universe.</p>
-            <a href="https://apps.apple.com/app/id6759879809" class="app-store-badge">
-                <img src="images/app-store-badge.svg" alt="Download on the App Store">
-            </a>
+            <div class="store-badges large">
+                <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                    <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                    <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                </a>
+            </div>
         </div>
     </section>
 

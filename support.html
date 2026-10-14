@@ -97,8 +97,10 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--text-primary); }
-        .nav-cta { display: inline-flex; align-items: center; }
-        .nav-cta img { height: 40px; width: auto; }
+        .store-badges { display: inline-flex; align-items: center; gap: 2px; flex-wrap: nowrap; }
+        .store-badge { display: inline-flex; align-items: center; line-height: 0; }
+        .store-badge img { height: 40px; width: auto; display: block; }
+        .store-badge.play img { height: 59px; }
 
         /* ── Scroll Reveal ── */
         .reveal {
@@ -350,12 +352,26 @@
         }
 
         /* ── Responsive ── */
-        @media (max-width: 768px) {
+        @media (max-width: 980px) {
             .nav-links { display: none; }
+        }
+
+        @media (max-width: 768px) {
             .page-header { padding: 120px 0 40px; }
             .contact-card { padding: 28px 20px; }
             .faq-question { padding: 16px 18px; }
             .faq-answer-content { padding: 0 18px 16px; }
+        }
+
+        @media (max-width: 720px) {
+            nav { padding: 12px 0; }
+            nav .container {
+                flex-wrap: wrap;
+                row-gap: 8px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .page-header { padding-top: 176px; }
         }
     </style>
 </head>
@@ -374,9 +390,14 @@
                 <li><a href="index.html#features">Features</a></li>
                 <li><a href="privacy-policy.html">Privacy</a></li>
             </ul>
-            <a href="https://apps.apple.com/app/id6759879809" class="nav-cta">
-                <img src="images/app-store-badge.svg" alt="Download on the App Store">
-            </a>
+            <div class="store-badges">
+                <a href="https://apps.apple.com/app/id6759879809" class="store-badge">
+                    <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.joamafer.terraforge" class="store-badge play">
+                    <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -417,12 +438,24 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
+                        Is Terraforge on Android?
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes. Terraforge is free on the App Store for iPhone and iPad, and on Google Play for Android phones and tablets running Android 10 or later. It is the same game: 208 elements, 266 recipes, and the optional Master Forger unlock. Progress and purchases stay with the store you downloaded from — an iPhone save does not appear on Android, and the other way around.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
                         How do I combine elements?
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Drag one element onto another on the forge screen. If the combination is valid, a new element will appear with a discovery animation. You start with four elements — Fire, Water, Air, and Earth — and build from there. Every recipe follows real-world logic, so think about what might happen when two things meet.
+                            Tap an element to place it on a forge plate. When both plates are filled, they combine, and a valid recipe plays the discovery animation. On iPhone and iPad you can also drag an element onto a plate. You start with four elements — Fire, Water, Air, and Earth — and build from there. Every recipe follows real-world logic, so think about what might happen when two things meet.
                         </div>
                     </div>
                 </div>
@@ -470,7 +503,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            If you purchased the Master Forger upgrade and need to restore it (for example, on a new device), go to the settings screen and tap "Restore Purchases." Make sure you're signed into the same Apple ID you used for the original purchase.
+                            On iPhone and iPad, open Settings and tap Restore Purchases, signed in with the same Apple ID you used to buy Master Forger. On Android there is no restore button: Google Play restores the unlock automatically when you open the app with the same Google account. A purchase on one store does not unlock the app on the other.
                         </div>
                     </div>
                 </div>
@@ -482,7 +515,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Yes. Terraforge syncs your progress via iCloud automatically. Discoveries made on your iPhone will appear on your iPad and vice versa. Just make sure both devices are signed into the same Apple ID with iCloud enabled. The sync is additive — it will merge progress from both devices, never overwrite.
+                            On iOS, yes — automatically, through iCloud. Discoveries on your iPhone show up on your iPad when both devices use the same Apple ID with iCloud enabled. On Android, sign in to Google Play Games and progress saves to that Google account, so another Android device signed into the same account can pick it up. In both cases the sync merges discoveries. It does not copy an iPhone save onto Android, or the other way around. A newer reset on one device does replace older progress on the others that share that same cloud save.
                         </div>
                     </div>
                 </div>
@@ -506,7 +539,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Yes. Terraforge works completely offline. All 208 elements, 266 recipes, and game logic are built into the app. No internet connection is required to play. When you go back online, your progress will sync to iCloud.
+                            Yes. Terraforge works completely offline. All 208 elements, 266 recipes, and the game logic are built into the app. No internet connection is required to play. When you are back online, iOS syncs to iCloud, and Android syncs to Google Play Games if you are signed in.
                         </div>
                     </div>
                 </div>
@@ -518,7 +551,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            No. Terraforge does not collect any personal data. There are no analytics, no tracking, no ads, and no accounts. Your progress is stored locally on your device and optionally synced via iCloud. Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.
+                            Terraforge runs no servers, analytics, tracking, or ads of its own, and it never asks you to create a Terraforge account. Progress stays on your device. iCloud can keep a copy on iOS, and Google Play Games can keep one on Android if you sign in for cloud save or leaderboards. Read the full <a href="privacy-policy.html">Privacy Policy</a> for what each store handles.
                         </div>
                     </div>
                 </div>
