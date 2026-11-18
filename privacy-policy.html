@@ -275,14 +275,14 @@
     <main>
         <div class="container">
             <div class="content-card reveal">
-                <p class="last-updated">Last updated: October 24, 2026</p>
+                <p class="last-updated">Last updated: November 18, 2026</p>
 
                 <div class="highlight-box">
-                    <p>No ads. No analytics. No tracking SDKs. Terraforge runs no servers of its own — the only data that ever leaves your device goes to Apple or Google to power the features you choose to use, and, on iOS, to RevenueCat to confirm your purchase.</p>
+                    <p>No ads. No analytics. No tracking SDKs. Terraforge runs no servers of its own — the only data that ever leaves your device goes to Apple or Google to power the features you choose to use, and to RevenueCat to confirm your purchase.</p>
                 </div>
 
                 <h2>Overview</h2>
-                <p>Terraforge is an element combination game designed with privacy as a core principle. This policy covers both the iOS version (App Store) and the Android version (Google Play). Terraforge has no backend of its own: we operate no servers, no accounts, and no databases. Where data does leave your device, it goes to Apple's or Google's own platform services — iCloud and Game Center on iOS, Google Play Games Services and Google Play Billing on Android — and only for features you opt into. The iOS version also checks your purchase with RevenueCat, described under In-App Purchases.</p>
+                <p>Terraforge is an element combination game designed with privacy as a core principle. This policy covers both the iOS version (App Store) and the Android version (Google Play). Terraforge has no backend of its own: we operate no servers, no accounts, and no databases. Where data does leave your device, it goes to Apple's or Google's own platform services — iCloud and Game Center on iOS, Google Play Games Services and Google Play Billing on Android — and only for features you opt into. Both versions also check your purchase with RevenueCat, described under In-App Purchases.</p>
 
                 <h2>Data We Don't Collect</h2>
                 <p>Terraforge does <strong style="color:var(--text-primary)">not</strong> collect:</p>
@@ -294,7 +294,7 @@
                     <li>Contacts, photos, files, messages, or calendar data</li>
                     <li>Any data sold or shared with third-party companies</li>
                 </ul>
-                <p>There are no third-party analytics, advertising, or tracking SDKs in Terraforge on either platform. Earlier iOS versions sent anonymous, aggregated usage signals to TelemetryDeck; that has been removed completely, along with the device identifier it used. The only third-party service is RevenueCat, which the iOS version uses for its in-app purchase, as described below.</p>
+                <p>There are no third-party analytics, advertising, or tracking SDKs in Terraforge on either platform. Earlier iOS versions sent anonymous, aggregated usage signals to TelemetryDeck; that has been removed completely, along with the device identifier it used. The only third-party service is RevenueCat, which both versions use for the in-app purchase, as described below.</p>
 
                 <h2>Local Storage</h2>
                 <p>Your game progress — discovered elements, milestones, and preferences — is stored on your device. On iOS this uses the Keychain; if you have iCloud Keychain enabled, iOS may sync Keychain items across your devices as part of Apple's standard behaviour. On Android this uses local app storage (Jetpack DataStore), which is removed when you uninstall the app.</p>
@@ -309,11 +309,12 @@
 
                 <h2>In-App Purchases</h2>
                 <p>Terraforge offers one optional one-time purchase (Master Forger). The transaction is handled entirely by Apple through the App Store or by Google through Google Play Billing. We never see, process, or store your payment details. The app checks your purchase status with the store so it knows whether to unlock the content; that status — whether or not you own Master Forger — is the only purchase information the app handles, and it is used solely to unlock what you paid for.</p>
-                <p><strong style="color:var(--text-primary)">iOS.</strong> To check whether you own Master Forger, the iOS app uses <a href="https://www.revenuecat.com" target="_blank" rel="noopener">RevenueCat</a>, a service that manages in-app purchases. When the app checks your purchase, or when you buy or restore Master Forger, it sends RevenueCat:</p>
+                <p>To check whether you own Master Forger, the app uses <a href="https://www.revenuecat.com" target="_blank" rel="noopener">RevenueCat</a>, a service that manages in-app purchases. When the app checks your purchase, or when you buy or restore Master Forger, it sends RevenueCat:</p>
                 <ul>
-                    <li>A random ID created by the app on your device. It isn't your name, email, Apple ID or advertising identifier, and we have no way to connect it to you.</li>
-                    <li>The purchase details the App Store provides: which product was bought, when, the price and currency, and the country of your App Store account.</li>
-                    <li>Basic technical details needed to answer the request, such as the app version, the iOS version and the device's language.</li>
+                    <li>A random ID created by the app on your device. It isn't your name, email, Apple ID, Google account or advertising identifier, and we have no way to connect it to you.</li>
+                    <li>The purchase details the App Store or Google Play provides: which product was bought, when, the price and currency, and the country of your store account.</li>
+                    <li>Which screen you started the purchase from (for example, the hint screen), so we can see which part of the game led to it.</li>
+                    <li>Basic technical details needed to answer the request, such as the app version, the iOS or Android version and the device's language.</li>
                 </ul>
                 <p>This is used only to confirm the purchase and unlock Master Forger, and to show us totals such as how many people bought it. It is not used for advertising or to track you across other apps or websites. If you bought Master Forger before the app used RevenueCat, the app passes that existing purchase to RevenueCat once, so it stays unlocked. RevenueCat's handling of this data is described in <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a>.</p>
 
@@ -322,9 +323,9 @@
                 <ul>
                     <li><strong style="color:var(--text-primary)">User IDs</strong> — your Google Play Games player ID, if you choose to sign in. Used for sign-in, leaderboards, and cloud save. Optional.</li>
                     <li><strong style="color:var(--text-primary)">Gameplay activity</strong> — your game progress, if you choose to sign in, stored as a Play Games Saved Game in your own Google account. Optional.</li>
-                    <li><strong style="color:var(--text-primary)">Purchase history</strong> — whether you own the Master Forger unlock, handled by Google Play Billing. Optional; applies only if you make the purchase.</li>
+                    <li><strong style="color:var(--text-primary)">Purchase history</strong> — whether you own the Master Forger unlock, handled by Google Play Billing and confirmed with RevenueCat under the app's random ID, as described under In-App Purchases. Used to unlock Master Forger and to count purchases. Optional; applies only if you make the purchase.</li>
                 </ul>
-                <p>All of it is transmitted over an encrypted connection, none of it is shared with third-party companies, and none of it reaches a server operated by us.</p>
+                <p>All of it is transmitted over an encrypted connection, none of it is shared with third-party companies (RevenueCat handles the purchase check on our behalf), and none of it reaches a server operated by us.</p>
 
                 <h2>Deleting Your Data</h2>
                 <p>Because Terraforge stores nothing on our own servers, you can delete everything yourself at any time:</p>
@@ -332,7 +333,7 @@
                     <li><strong style="color:var(--text-primary)">On-device progress.</strong> Use Settings → Reset All Progress inside the app, or uninstall Terraforge. Both remove all locally stored game data immediately.</li>
                     <li><strong style="color:var(--text-primary)">Android cloud save.</strong> Open the Google Play Games app → Settings → Delete Play Games account &amp; data, and choose to delete the data for Terraforge. This permanently removes your Saved Game and your leaderboard entries for the game from your Google account.</li>
                     <li><strong style="color:var(--text-primary)">iOS cloud save.</strong> Turn off iCloud for Terraforge in iOS Settings, or delete the app's iCloud data from Settings → Apple ID → iCloud → Manage Storage. Game Center scores can be removed by deleting your Game Center data through Apple.</li>
-                    <li><strong style="color:var(--text-primary)">Purchase records.</strong> Records of a purchase are retained by Apple or Google as required for their billing, tax, and refund obligations. Those records are held by them, under their own policies, and we cannot delete them. On iOS, RevenueCat also keeps a record of the purchase under the app's random ID, which isn't linked to you.</li>
+                    <li><strong style="color:var(--text-primary)">Purchase records.</strong> Records of a purchase are retained by Apple or Google as required for their billing, tax, and refund obligations. Those records are held by them, under their own policies, and we cannot delete them. RevenueCat also keeps a record of the purchase under the app's random ID, which isn't linked to you.</li>
                 </ul>
                 <p>Apart from that anonymous RevenueCat record, we hold no copy of any of this data, so there is nothing for us to retain after you delete it. If you want help with any of the steps above, email <a href="mailto:joamaferapps@gmail.com">joamaferapps@gmail.com</a> and we will walk you through it.</p>
 
@@ -340,7 +341,7 @@
                 <p>Terraforge never asks you to create an account, register, or give us a password. On Android the system may offer a one-time Google Play Games sign-in prompt; declining it costs you nothing but cloud save and leaderboards, and every other feature stays available.</p>
 
                 <h2>Offline Functionality</h2>
-                <p>Terraforge plays completely offline. No internet connection is required. When you are online, only Apple's and Google's own services — iCloud, Game Center, Google Play Games Services, and the App Store or Google Play — may communicate as part of their standard functionality, along with the purchase check with RevenueCat on iOS. If you are offline, the app remembers that you own Master Forger.</p>
+                <p>Terraforge plays completely offline. No internet connection is required. When you are online, only Apple's and Google's own services — iCloud, Game Center, Google Play Games Services, and the App Store or Google Play — may communicate as part of their standard functionality, along with the purchase check with RevenueCat. If you are offline, the app remembers that you own Master Forger.</p>
 
                 <h2>Children's Privacy</h2>
                 <p>Terraforge is a general-audience game and does not knowingly collect personal information from children under 13. The Android version is rated for a 13+ target age group on Google Play. Cloud save and leaderboards depend on a Google or Apple account, whose age requirements are set by those platforms.</p>
